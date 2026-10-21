@@ -1,0 +1,29 @@
+DES is obsolete, but it teaches three lasting lessons: how a Feistel network works, why small keys die, and why chaining ciphers does not simply add security.
+
+## A Feistel round you can follow
+
+The lab shrinks DES to a 16-bit block and 4 rounds, keeping the same round structure and DES's real S-boxes. One round expands the right half (8 to 12 bits), mixes in a round key with XOR, pushes the result through two S-boxes (6 bits in, 4 out), permutes, and finally computes `new R = L xor F(R, K)`.
+
+The clever part is that this construction is invertible **whatever F is**. DES can use lossy S-boxes and still decrypt: run the same rounds with the round keys reversed. The S-boxes are the only non-linear piece; without them the whole cipher would be a system of linear equations.
+
+## Meet in the middle: why 2DES is not 2x stronger
+
+Double encryption with two independent keys looks like it doubles the key length. The meet-in-the-middle attack shows it does not. Encrypt a known plaintext under every first key and store the results. Decrypt the known ciphertext under every second key and look each result up. A match is a candidate key pair.
+
+On the toy cipher with two 16-bit keys, brute force needs 2^32 (about 4.3 billion) double encryptions. The attack used **131,072 operations** (2 times 2^16) and found the single correct pair given four known plaintext/ciphertext pairs.
+
+At real scale this is why 2DES offers about 57 bits of security rather than 112, and why the standard fix was 3DES: with three keys the attack costs about 2^112, not 2^168.
+
+## Brute-forcing real DES, scaled down
+
+The lab fixes all but *n* of DES's 56 key bits and searches the rest with real DES. Timing doubles with every extra bit. At about 78,000 keys per second in Python, an average full search (2^55 keys) would take roughly 14,600 years on one process. The point is the scaling: purpose-built hardware does billions of keys per second, and DES fell because its key space is searchable, not because the algorithm is flawed.
+
+## 3DES versus AES, measured
+
+Encrypting the same data in CBC mode on the lab machine, AES-128 was roughly 24 to 104 times faster than 3DES depending on the library, data size and whether AES-NI hardware was used. The structural reasons are solid everywhere: 3DES runs DES three times (48 bit-level rounds) on **64-bit** blocks, while AES-128 runs 10 byte-oriented rounds on 128-bit blocks, and AES-NI does a whole round in one instruction.
+
+The exact multiple is not a constant. One library's 3DES was unusually slow, which widens the gap, so always quote the library and CPU alongside a benchmark figure. 3DES's small block also allows birthday collisions after about 2^32 blocks (the Sweet32 attack), which is the real reason it is deprecated.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

@@ -1,0 +1,41 @@
+Every cipher in this chapter's lab falls to the same idea: **language has habits, and encryption cannot hide them.**
+
+## Caesar: 26 keys, solved by counting
+
+A Caesar cipher shifts every letter by a fixed amount. There are only 26 shifts, so you could try them all, but counting is more elegant. English text has a distinctive letter profile (`e` is roughly 12.7%, `z` about 0.07%). For each possible shift, compare the ciphertext's letter counts to that profile with a chi-squared statistic and keep the best match. In the demo, 120 characters of ciphertext were enough to recover the shift, and the tests check several shifts at 150 characters.
+
+## Substitution: 26! keys, still broken
+
+A general substitution cipher maps each letter to any other letter. That is 26! keys, about 2^88, far too many to try. But the cipher preserves the structure of the language, so the attack becomes a search that a score can guide:
+
+1. Guess that the most common ciphertext letter is `e`, the next is `t`, and so on.
+2. Swap two letters in the guessed key. If the decrypted text now looks more like English, keep the swap.
+3. Repeat until nothing improves.
+
+"Looks like English" is a score from letter-triple statistics. The lab blends trigram, bigram and single-letter counts, because a small training corpus makes trigrams sparse.
+
+**How much ciphertext does that need?** Tested on text the model was not trained on, with random keys:
+
+- 300 characters: 89% of letters correct on average, but only 2 of 5 runs fully solved.
+- **400 characters: every run solved.** That is about 70 words.
+
+A real attacker has far more text than that, so a 2^88 keyspace gave no protection at all.
+
+## Brute force: how long is "long enough"?
+
+The second script estimates search time for a key of a given length against three illustrative attackers (1e9, 1e12 and 1e18 guesses per second; round numbers chosen to span orders of magnitude, not measurements). Average times:
+
+- **40-bit key:** 9 minutes on one GPU; under a second for the others.
+- **56-bit (DES):** 1.1 years on one GPU, 10 hours for a cluster.
+- **80-bit:** safe against one GPU and a cluster, but 7 days for the biggest attacker.
+- **128-bit:** hundreds of times the age of the universe, even at 1e18 guesses per second.
+
+Each added bit doubles the work, so a key only 2.3 times longer (128 bits instead of 56) is 2^72 times harder to search.
+
+## What to take away
+
+**Kerckhoffs's principle:** a system must stay secure when everything except the key is public. The substitution cipher's huge keyspace did not matter because its structure leaked. And key length only helps once the algorithm has no structural weakness. Past 128 bits, nobody attacks by brute force; they attack implementations, key handling and people.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

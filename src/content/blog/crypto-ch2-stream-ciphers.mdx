@@ -1,0 +1,35 @@
+A stream cipher turns a short key into a long pseudo-random keystream and XORs it with the message. The lab builds the ideal version, then shows two ways real ones fail.
+
+## The one-time pad: perfect, and impractical
+
+Encrypt by XOR-ing the message with a truly random key of the same length, used once. This is *perfectly* secret: for any plaintext of the right length there exists a key that produces the ciphertext you are looking at, so the ciphertext tells an attacker nothing. The demo decrypts one ciphertext into two completely different messages just by choosing the key.
+
+## Reuse the pad and the proof collapses
+
+Encrypt two messages with the same key and XOR the ciphertexts:
+
+```python
+c1 = p1 ^ key
+c2 = p2 ^ key
+c1 ^ c2 == p1 ^ p2     # the key cancels out
+```
+
+The attacker now holds the XOR of two plaintexts. Because both are language, sliding a guessed word (a "crib") along the result reveals the other message wherever the guess is right. This is **crib dragging**, and it is how reused pads were broken in practice.
+
+## The keystream-reuse detector
+
+The same flaw appears in modern stream ciphers whenever a key and nonce repeat. The lab encrypts two messages with ChaCha20 under a repeated nonce and builds a detector with one observation: ASCII text XOR ASCII text never sets the top bit of a byte. Reused-keystream pairs score 1.00 on "fraction of XOR bytes with the top bit clear"; independent keystreams score about 0.44 (random bytes give 0.5).
+
+Crib dragging then recovers fragments of both messages, for example the guess " and " lining up with "day a" in the other message. Honest limit: on short messages some false hits are unavoidable, so the tool ranks candidates and a human decides which message holds the crib.
+
+## The LFSR: fast, and linear
+
+A linear-feedback shift register is a cheap keystream source. The lab's 16-bit register has the maximum period of 65,535. Linear means breakable: with the **Berlekamp-Massey algorithm**, 2L known keystream bits recover an L-bit register completely. Six known plaintext bytes (48 bits) recovered the 16-bit register's taps, and the rest of the message followed. Real designs add non-linear mixing for exactly this reason.
+
+## What to take away
+
+Nonce uniqueness is not a detail; it is the one-time-pad rule in disguise. Use random 96-bit nonces with a limit on messages per key, or counters, or a misuse-resistant mode. And never build a cipher from linear parts alone.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

@@ -1,0 +1,39 @@
+AES is the cipher nearly everything uses. This chapter's lab implements it from scratch to understand it, then builds a file encryptor the right way: by *not* using that implementation.
+
+## One round, by hand
+
+AES works on a 4x4 matrix of bytes. Each round applies four steps, checked in the lab against the worked example in the FIPS-197 standard:
+
+1. **SubBytes** replaces each byte via the S-box. It is the only non-linear step. The S-box is not magic: it is the multiplicative inverse in GF(2^8) followed by an affine map, and the code computes it instead of typing in a table.
+2. **ShiftRows** rotates row *r* left by *r* positions, so bytes leave their column.
+3. **MixColumns** multiplies each column by a fixed matrix, so every output byte depends on four inputs.
+4. **AddRoundKey** XORs in the round key. It is the only step that uses the key.
+
+ShiftRows and MixColumns together give diffusion; SubBytes gives confusion. The final round skips MixColumns. Starting from the standard's example input, round 0 produces `193de3be...` and round 1's SubBytes gives `d42711ae...`, matching the document value for value.
+
+## Verified against the standard
+
+The from-scratch cipher passes all 7 official test vectors (FIPS-197 and NIST SP 800-38A), as does PyCryptodome. It also matches the library on 200 random key/block pairs. Passing vectors is necessary, not sufficient, but random cross-checking against a trusted implementation catches what a handful of vectors misses.
+
+## Hardware acceleration
+
+With AES-NI on, AES was about 3.4 times faster than a good portable C implementation on the lab machine, and the pure-Python version was roughly 1,300 times slower than that C code. Hardware AES also runs in constant time without table lookups, which closes the cache-timing side channels that table-based software AES, including this lab's, is exposed to. That is why the educational code carries a warning label.
+
+## A file encryptor, done carefully
+
+The CLI encrypts files with AES-256-GCM from the `cryptography` package, because production code should never hand-roll the cipher. The design avoids the usual mistakes:
+
+- A random salt and scrypt turn the password into a 32-byte key.
+- The nonce is 8 random bytes per file plus a chunk counter, so no key and nonce pair ever repeats.
+- Files are encrypted in 64 KiB authenticated chunks. The header and a "final chunk" flag are authenticated data, so truncating, appending or reordering chunks is detected, not just flipped bits.
+- Decryption writes a temporary file and renames it only after every chunk verifies, so unverified plaintext is never left behind.
+
+The tests cover round-trips from 0 bytes to 200 KB and tamper cases for a flipped bit in the body and header, truncation, appended data, reordering, a wrong password and a junk file. Each one fails cleanly with no output file.
+
+## What to take away
+
+Implement a cipher once to understand it; ship a vetted one. The hard part of encryption in practice is rarely the cipher. It is nonces, key derivation, authentication of the whole message, and failing safely.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*
