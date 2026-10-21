@@ -1,0 +1,19 @@
+Everything so far assumed you know whose public key you hold. PKI is how that assumption gets made, and this chapter ends the series by building a small TLS-style protocol that depends on it.
+
+## Validating a certificate path
+
+The validator checks each step in the open: the leaf's SAN matches the hostname, every certificate is inside its validity window, every signature verifies under the next certificate's key, every issuer is really a CA allowed to sign certificates, path-length limits hold, and the chain ends at a trust anchor. Anchors are matched by name **and** public key. That handles the cross-signed roots seen on real sites and rejects an impostor root that borrowed a trusted name.
+
+Tests run against a local root, intermediate and leaf, covering expired certificates, wrong hostnames, untrusted roots, a non-CA used as an issuer, and a path-length violation. Run against my two sites with 122 system anchors, both validate. Their leaves list a CRL and no OCSP address, which fits the industry moving toward short-lived certificates.
+
+## A mini TLS
+
+The capstone is a TLS 1.3 style handshake: ephemeral X25519 on both sides, a server certificate chain, a signature over the hash of the whole transcript so far, Finished MACs, HKDF-derived keys bound to the transcript, and AES-GCM records with per-direction keys and implicit sequence numbers.
+
+Each design choice maps to an attack from earlier chapters. Signing the transcript is what defeats the man in the middle from chapter 6. Swapping an ephemeral key in either hello is caught. Flipping a single byte at any sampled position of the server's flight is caught. Tampering, replay, reordering, reflection and truncation of records are all rejected.
+
+It is not TLS. There is no client authentication, resumption or revocation checking, and only one cipher suite. The point was to see why every piece of the real protocol exists. For anything real, use a vetted library.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

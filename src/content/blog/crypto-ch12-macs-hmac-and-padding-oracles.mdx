@@ -1,0 +1,21 @@
+A MAC proves a message came from someone with the key and was not changed. This chapter builds HMAC, breaks the obvious shortcut, and shows why the order of encrypting and authenticating matters.
+
+## HMAC from scratch
+
+I wrote SHA-256 from the standard first, checked it against the standard library at every padding boundary, then built HMAC on top of it. It passes the RFC 4231 vectors, including the cases with keys longer than the block size.
+
+## Why not just hash the key and message together
+
+tag = SHA256(secret + message) looks fine and is not. SHA-256 outputs its internal state, so from a message and its tag an attacker can resume hashing and produce a valid tag for the message plus padding plus anything they append, without knowing the secret. They only guess the secret's length. The demo turned user=guest&amount=100 into a message ending in &admin=true that the verifier accepted, after finding the true length of 30. The same procedure failed every length guess against HMAC, whose outer hash hides the resumable state.
+
+## MAC-then-encrypt versus encrypt-then-MAC
+
+With MAC-then-encrypt in CBC mode, the receiver must decrypt and check padding before it can check anything else. If "bad padding" looks different from "bad MAC", an attacker can recover the plaintext a byte at a time. The attack recovered a 33-byte session string, plus its MAC and padding, with **10,182 queries** and no key. Against encrypt-then-MAC the same attack found no signal, because the tag is checked first and every modified ciphertext is rejected identically. Lucky 13 later showed that even identical error messages can leak through timing, which is part of why modern designs use AEAD modes.
+
+## Webhooks and speed
+
+A signed webhook carries a timestamp and unique id inside the MAC, checks the signature in constant time before recording the id, supports two active secrets for rotation, and rejects replays. And AES-GCM beat AES-CBC plus HMAC by 4.5 to 16 times across message sizes in my benchmark, though the 1 MiB row was noisy and I did not repeat it.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

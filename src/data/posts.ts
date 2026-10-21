@@ -9,6 +9,54 @@ export type Post = {
 /** Add a post: create src/content/blog/<slug>.mdx and add its entry here (newest first). */
 export const posts: Post[] = [
   {
+    slug: "crypto-deep-dive-nonce-reuse",
+    title: "Deep dive: one mistake, three broken systems",
+    description:
+      "Keystream reuse, ElGamal and ECDSA all fall to the same error: a value that had to be fresh was used twice.",
+    date: "2026-10-21",
+    tags: ["cryptography", "nonces", "deep-dive"],
+  },
+  {
+    slug: "crypto-ch13-pki-and-a-mini-tls",
+    title: "Certificate validation, and a mini TLS built from the pieces",
+    description:
+      "A path validator tested against a local CA and two live sites, then a handshake that defeats the man in the middle, replay and truncation.",
+    date: "2026-10-21",
+    tags: ["cryptography", "pki", "tls", "series"],
+  },
+  {
+    slug: "crypto-ch12-macs-hmac-and-padding-oracles",
+    title: "HMAC, length extension and a padding oracle that reads your session",
+    description:
+      "Why hashing the key and message together fails, a 10,182-query padding oracle against MAC-then-encrypt, and signed webhooks.",
+    date: "2026-10-21",
+    tags: ["cryptography", "hmac", "series"],
+  },
+  {
+    slug: "crypto-ch11-hash-functions-and-passwords",
+    title: "Hash functions: avalanche, collisions and 37,000x slower passwords",
+    description:
+      "CRC32 passes the avalanche test and is still useless. Birthday collisions measured, and Argon2id against SHA-256 for password storage.",
+    date: "2026-10-21",
+    tags: ["cryptography", "hashing", "series"],
+  },
+  {
+    slug: "crypto-ch10-digital-signatures",
+    title: "RSA signatures byte for byte, and three ways to forge the textbook kind",
+    description:
+      "A from-scratch signature identical to OpenSSL's, forgeries that need no key, and the certificate chains of two live sites.",
+    date: "2026-10-21",
+    tags: ["cryptography", "signatures", "series"],
+  },
+  {
+    slug: "crypto-ch9-elliptic-curves-and-ecdsa",
+    title: "Elliptic curves by hand, and the repeated number that breaks ECDSA",
+    description:
+      "Adding points on a 17-element field, ECC against RSA and DH on speed and size, and recovering a private key from a reused nonce.",
+    date: "2026-10-21",
+    tags: ["cryptography", "ecc", "series"],
+  },
+  {
     slug: "crypto-deep-dive-mitm-authentication",
     title: "Deep dive: encryption without authentication protects you from the wrong person",
     description:

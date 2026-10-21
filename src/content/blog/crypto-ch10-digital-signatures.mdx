@@ -1,0 +1,19 @@
+A signature is a proof that someone with a private key approved exactly these bytes. This chapter builds RSA signatures, forges the textbook version, and reads the certificate chains of two live sites.
+
+## RSA signatures, byte for byte
+
+Signing hashes the message, wraps the hash in a DER DigestInfo, pads it to the modulus length with 00 01 FF…FF 00, and applies the private exponent. PKCS#1 v1.5 signing is deterministic, so the strongest test is that my from-scratch signature is **byte-identical to OpenSSL's**, and the tests check exactly that for empty, short and long messages, plus verification in both directions.
+
+The verifier rebuilds the expected block and compares all of it. It does not parse the padding. Lenient parsers that stopped at the digest and ignored trailing bytes are what let Bleichenbacher's 2006 low-exponent forgery work against real libraries, and a test feeds ours a valid digest followed by garbage to make sure it refuses.
+
+## Forging textbook RSA
+
+Sign m^d with no hash or padding and the maths forges for you. Pick any s and publish m = s^e: a valid pair, no key needed. Multiply two honest signatures and you get a valid signature on the product of the messages (143 from 11 and 13 in the test). Ask the signer to sign m·r^e, divide the answer by r, and you hold a signature on a message the signer would have refused. Offered to the padded verifier, a random signature is rejected.
+
+## Reading real certificate chains
+
+Run against the two sites I own, both chains verify link by link. The Vercel site presents a wildcard RSA-2048 leaf, an intermediate named WR1, and GTS Root R1. The Render site uses a P-256 leaf, WE1, and GTS Root R4. The last certificate in each is a **cross-signed** root, issued by GlobalSign so older clients can still build a path. That detail matters in the next chapter, when path validation has to decide what counts as trusted.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

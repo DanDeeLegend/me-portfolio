@@ -1,0 +1,21 @@
+Elliptic curves give you public-key cryptography with much smaller keys. This chapter adds points by hand, compares key exchanges, and then uses a single repeated number to recover a private key.
+
+## Adding points by hand
+
+On the textbook curve y² = x³ + 2x + 2 over the integers mod 17, with generator G = (5, 1), doubling G uses a slope of 9/2, which is 13 mod 17, and lands on (6, 3). Adding G again gives (10, 6). Keep going and 19G is the point at infinity, so the group has exactly 19 elements. The same double-and-add code runs the real NIST P-256 constants, and a from-scratch P-256 key exchange produces the same shared secret as OpenSSL.
+
+## What ECC buys you
+
+Measured on one machine, both sides of an exchange combined: X25519 took 0.076 ms and P-256 ECDH 0.086 ms, against 0.678 ms for the 2,048-bit finite-field DH group and 0.596 ms for RSA-2048 key transport. Public keys are 32 to 65 bytes, against 256 for DH-2048 and 294 for RSA-2048. Roughly equal security, about nine times less time and four to eight times smaller keys.
+
+For signatures the pattern splits. Ed25519 signs in 37 microseconds with a 64-byte signature. RSA-2048 signs in 555 microseconds with a 256-byte one, but **verifies** in 29 microseconds, faster than Ed25519's 117. So for an IoT device that signs, pick Ed25519 or ECDSA. For one that only verifies firmware, RSA-2048 is fine. These are wall-clock numbers on a fast CPU, not energy measurements, so re-measure on the real board.
+
+## One repeated number breaks ECDSA
+
+ECDSA computes s = k⁻¹(h + r·d) mod n, where k is a fresh secret per signature and d is the private key. If two signatures reuse k, subtracting them gives k, and then d falls out of one more modular inverse. No brute force. The code recovers the private key on a toy curve and on P-256, and then signs a new message that verifies under the victim's public key.
+
+This is not hypothetical. Sony's PlayStation 3 signed firmware with a constant k, and fail0verflow showed the recovery at 27C3 in 2010. The fixes are deterministic nonces (RFC 6979) or Ed25519, which derives the nonce by hashing.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

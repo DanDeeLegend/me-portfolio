@@ -1,0 +1,23 @@
+Three chapters of this series broke a system the same way: something that had to be fresh was used twice. The same mistake, three different algorithms.
+
+## Stream cipher keystream
+
+A stream cipher XORs a keystream into the plaintext. Reuse the keystream and the XOR of the two ciphertexts equals the XOR of the two plaintexts, with the key gone entirely. A one-bit statistic detects reuse: ordinary English XORed with English has its high bit clear in every byte. Crib dragging then recovers text from there.
+
+## ElGamal
+
+Encrypting with the same random k twice makes the first half of both ciphertexts identical, and dividing the second halves cancels the shared secret. Knowing one plaintext reveals the other.
+
+## ECDSA
+
+Two signatures with the same k share the same r. Subtracting the s values gives k, and then one modular inverse gives the private key. On P-256 that took no brute force, and the attacker then signed new data that verified. Sony's PlayStation 3 shipped exactly this flaw.
+
+## The common pattern and the fixes
+
+In each case a value that must be unpredictable and unique is reused, and the algebra turns two outputs into one equation with one unknown. The fixes are the same shape too: derive the value deterministically from the key and message so it cannot repeat (RFC 6979, Ed25519), use constructions that avoid caller-supplied nonces, or use a misuse-resistant mode. AES-GCM carries the same risk: reusing a nonce under one key leaks the XOR of plaintexts and the authentication key.
+
+The practical rule is to treat randomness and counters as part of your threat model, and to prefer APIs that generate them for you.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*
