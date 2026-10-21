@@ -22,7 +22,10 @@ export const metadata: Metadata = {
     title: `${site.name} · Software Engineer`,
     description: site.tagline,
     type: "website",
+    siteName: site.name,
+    locale: "en_NG",
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = { themeColor: "#0c0c10" };

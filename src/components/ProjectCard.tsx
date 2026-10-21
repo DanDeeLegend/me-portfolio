@@ -1,6 +1,7 @@
 "use client";
 
 import type { Project } from "@/data/projects";
+import { ProjectShots } from "./ProjectShots";
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
   // Cursor-follow spotlight: only sets CSS vars, so no re-renders on mouse move.
@@ -39,6 +40,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           {project.year}
         </span>
       </div>
+      <ProjectShots project={project} />
       <h3 className="relative mt-6 font-display text-3xl font-bold tracking-tight">
         {project.title}
       </h3>

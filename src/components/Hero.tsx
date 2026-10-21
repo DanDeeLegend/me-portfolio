@@ -1,20 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { site } from "@/data/site";
 
 export function Hero() {
-  const [i, setI] = useState(0);
-
-  useEffect(() => {
-    const id = setInterval(() => setI((n) => (n + 1) % site.roles.length), 2400);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <section className="relative overflow-hidden">
-      {/* Decorative glow blobs */}
+      {/* Decorative glow */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -top-40 -right-32 h-[28rem] w-[28rem] rounded-full blur-3xl"
@@ -36,25 +28,12 @@ export function Hero() {
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-[clamp(2.75rem,8vw,6.5rem)] font-extrabold leading-[0.95] tracking-tighter"
         >
-          Hi, I&apos;m {site.name}.
+          Heyaa I&apos;m Daniel
           <br />
-          <span className="text-muted">I build </span>
-          <span className="relative inline-block align-bottom">
-            <span className="sr-only">{site.roles.join(", ")}</span>
-            <AnimatePresence mode="wait">
-              <motion.span
-                key={site.roles[i]}
-                aria-hidden="true"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.35 }}
-                className="inline-block text-accent"
-              >
-                {site.roles[i]}
-              </motion.span>
-            </AnimatePresence>
-          </span>
+          a.k.a <span className="text-accent">Dannybouy.</span>
+          <br />
+          <span className="text-muted">I do the unthinkable with </span>
+          <span className="text-accent">AI</span>
         </motion.h1>
 
         <motion.p

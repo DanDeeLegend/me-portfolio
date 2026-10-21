@@ -125,6 +125,19 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="group block h-full rounded-3xl border border-line bg-card p-6 transition-colors hover:border-accent"
               >
+                <div
+                  aria-hidden="true"
+                  className="relative mb-5 flex aspect-[1.91/1] items-end overflow-hidden rounded-2xl border border-line p-4"
+                  style={{
+                    background:
+                      "radial-gradient(120% 120% at 100% 0%, var(--glow), transparent 60%), var(--bg)",
+                  }}
+                >
+                  <span className="absolute top-1 right-4 select-none font-display text-[7rem] font-extrabold leading-none text-accent opacity-20">
+                    {w.platform[0]}
+                  </span>
+                  <span className="relative font-mono text-sm text-muted">{w.handle}</span>
+                </div>
                 <span className="font-display text-2xl font-bold">{w.platform} ↗</span>
                 <p className="mt-2 text-muted">{w.blurb}</p>
               </a>

@@ -7,14 +7,13 @@ export const site = {
   handle: "DanDeeLegend",
   url: "https://example.com", // REPLACE with the deployed URL once hosted
   headline: "Software engineer in the making.",
-  roles: ["blockchain apps", "secure systems", "full-stack products", "things people use"],
   tagline:
     "Software Engineering student at Nile University of Nigeria with hands-on experience in applied cryptography, blockchain apps and full-stack web and mobile. I work from primary sources and build products for real users.",
   location: "Abuja, Nigeria",
   email: "danielaminu2@gmail.com",
   availability: "Activeee for gigs, internships and the likes",
-  /** Set to "/cv.pdf" after adding a CV to public/ (a redacted copy, without phone or student ID). */
-  cvPath: null as string | null,
+  /** Redacted CV (no phone number or student ID) lives at public/cv.pdf. Set to null to hide the button. */
+  cvPath: "/cv.pdf" as string | null,
   socials: [
     { label: "GitHub", href: "https://github.com/DanDeeLegend" },
     { label: "LinkedIn", href: "https://linkedin.com/in/daniel-aminu" },
@@ -59,11 +58,13 @@ export const experience = [
 export const writing = [
   {
     platform: "Medium",
+    handle: "@danielaminu2",
     href: "https://medium.com/@danielaminu2",
     blurb: "Technical articles on engineering topics.",
   },
   {
     platform: "Substack",
+    handle: "@dannii0",
     href: "https://substack.com/@dannii0",
     blurb: "Essays on personal growth, faith and reflection.",
   },

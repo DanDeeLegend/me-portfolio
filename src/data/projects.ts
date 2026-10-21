@@ -1,5 +1,7 @@
 export type ProjectStatus = "Live" | "Shipped" | "Prototype" | "In development" | "Planned" | "Concept";
 
+export type Shot = { src: string; alt: string; width: number; height: number };
+
 export type Project = {
   slug: string;
   title: string;
@@ -13,6 +15,9 @@ export type Project = {
   /** Source repo is private: show a label instead of a link that would 404. */
   privateRepo?: boolean;
   links: { demo?: string; repo?: string };
+  /** Screenshots served from /public. "phones" = tall mobile shots side by side; "wide" = desktop shots with thumbnails. */
+  shots?: Shot[];
+  shotLayout?: "wide" | "phones";
 };
 
 export const projects: Project[] = [
@@ -35,6 +40,21 @@ export const projects: Project[] = [
       demo: "https://contract-lens-two.vercel.app",
       repo: "https://github.com/DanDeeLegend/ContractLens",
     },
+    shotLayout: "wide",
+    shots: [
+      {
+        src: "/projects/contractlens/dashboard.webp",
+        alt: "ContractLens dashboard: a contract card with its address, a search box and a table of recent interactions with function names, callers, block numbers, gas used and success or failed status.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        src: "/projects/contractlens/transaction.webp",
+        alt: "ContractLens transaction detail: a transfer() call with caller wallet, block number, gas used, timestamp, transaction hash and decoded inputs (to address and amount).",
+        width: 1440,
+        height: 810,
+      },
+    ],
   },
   {
     slug: "padding-scheme-explorer",
@@ -74,19 +94,40 @@ export const projects: Project[] = [
     slug: "signalmap",
     title: "SignalMap",
     summary:
-      "Desktop app for mapping WiFi and cellular signal quality across a university campus.",
+      "Community-powered mobile network intelligence for Nigerian university students: know where your network works. Students report signal quality and the map colours each campus building by carrier.",
     highlights: [
-      "Analysed 60+ Google Form survey responses on campus network disruption using pivot tables.",
-      "Built a pixel-accurate Flutter UI from a Figma export, extracting design tokens and the widget tree end to end.",
-      "Docs-as-code structure: PRD, SRS and architecture docs, with Git hygiene around raw survey data.",
+      "A building is coloured only once it has 5+ reports from 3+ different users within 30 days, so one noisy report can't skew the map.",
+      "Shipped as an installable Flutter PWA, from a codebase that also builds for Android and iOS.",
+      "Grounded in research: analysed 60+ survey responses on campus network disruption before designing, then built a pixel-accurate UI from a Figma export.",
     ],
     role: "Product and developer",
-    stack: ["Flutter", "Dart", "Figma", "Google Forms"],
+    stack: ["Flutter", "Dart", "Supabase", "Figma", "Render"],
     year: "2026",
-    status: "Prototype",
+    status: "Live",
     featured: true,
     privateRepo: true,
-    links: {},
+    links: { demo: "https://signalmap-8117.onrender.com" },
+    shotLayout: "phones",
+    shots: [
+      {
+        src: "/projects/signalmap/map.webp",
+        alt: "SignalMap home screen: a campus map with building outlines, a search bar and filter chips for MTN, Airtel, Glo and 9mobile.",
+        width: 540,
+        height: 1200,
+      },
+      {
+        src: "/projects/signalmap/building.webp",
+        alt: "SignalMap building detail sheet for the Library: MTN Nigeria rated Good, based on 14 reports, with high confidence.",
+        width: 540,
+        height: 1200,
+      },
+      {
+        src: "/projects/signalmap/report.webp",
+        alt: "SignalMap report flow, step 1 of 3: detected location and a choice of network provider.",
+        width: 540,
+        height: 1200,
+      },
+    ],
   },
   {
     slug: "the-board",
