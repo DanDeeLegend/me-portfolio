@@ -34,12 +34,10 @@ export const projects: Project[] = [
     role: "Designed and built end to end during the Bitnob internship",
     stack: ["React", "TypeScript", "Vite", "ethers.js v6", "Alchemy"],
     year: "2026",
-    status: "Live",
+    status: "In development",
     featured: true,
-    links: {
-      demo: "https://contract-lens-two.vercel.app",
-      repo: "https://github.com/DanDeeLegend/ContractLens",
-    },
+    // The old contract-lens-two.vercel.app URL serves a different app; restore a demo link after redeploying.
+    links: { repo: "https://github.com/DanDeeLegend/ContractLens" },
     shotLayout: "wide",
     shots: [
       {
@@ -89,6 +87,27 @@ export const projects: Project[] = [
     featured: true,
     privateRepo: true,
     links: { demo: "https://ncf-website-ten.vercel.app" },
+    shotLayout: "wide",
+    shots: [
+      {
+        src: "/projects/ncf/home.webp",
+        alt: "Nile Christian Fellowship home page: a full-width photo of a congregation in a lecture hall with the headline 'Nile Christian Fellowship', stats for members and years of ministry, and Join Us and Watch Sermons buttons.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        src: "/projects/ncf/events.webp",
+        alt: "Nile Christian Fellowship events page: a hero reading 'Moments that transform lives' above an 'Upcoming Events' section.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        src: "/projects/ncf/sermons.webp",
+        alt: "Nile Christian Fellowship sermons page: a hero reading 'Listen. Learn. Grow.' above a 'Find a message' browse section.",
+        width: 1440,
+        height: 810,
+      },
+    ],
   },
   {
     slug: "signalmap",
