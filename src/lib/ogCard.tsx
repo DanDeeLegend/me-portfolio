@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { site } from "@/data/site";
 
 export const ogSize = { width: 1200, height: 630 };
-export const ogAlt = `${site.name} (a.k.a Dannybouy): software engineer, AI, blockchain and cryptography`;
+export const ogAlt = `${site.name} (a.k.a Dannybouy): software engineer, vibecoder, blockchain and cryptography`;
 
 /** Shared 1200x630 share card, used for both Open Graph and Twitter previews. */
 export function ogCard() {
@@ -44,7 +44,7 @@ export function ogCard() {
             Dannybouy.
           </div>
           <div style={{ display: "flex", fontSize: 44, marginTop: 28, color: "#a3a1ad" }}>
-            I do the unthinkable with&nbsp;<span style={{ color: "#c8ff3d" }}>AI</span>
+            I&nbsp;<span style={{ color: "#c8ff3d" }}>vibecode</span>&nbsp;the unthinkable.
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 26, color: "#a3a1ad" }}>

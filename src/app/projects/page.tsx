@@ -6,7 +6,7 @@ import { projects } from "@/data/projects";
 export const metadata: Metadata = {
   title: "Projects",
   alternates: { canonical: "/projects" },
-  description: "Everything I've built: full-stack apps, AI tools and blockchain experiments.",
+  description: "Everything I've built: full-stack web apps, mobile apps, and blockchain and cryptography projects.",
 };
 
 export default function ProjectsPage() {

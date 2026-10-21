@@ -27,8 +27,9 @@ export function Hero() {
           <br />
           a.k.a <span className="text-accent">Dannybouy.</span>
           <br />
-          <span className="text-muted">I do the unthinkable with </span>
-          <span className="text-accent">AI</span>
+          <span className="text-muted">I </span>
+          <span className="text-accent">vibecode</span>
+          <span className="text-muted"> the unthinkable.</span>
         </h1>
 
         <p className="rise mt-8 max-w-2xl text-lg text-muted sm:text-xl" style={d(0.25)}>
