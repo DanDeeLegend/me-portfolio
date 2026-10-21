@@ -3,7 +3,7 @@ This site is small on purpose: a handful of pages, no database, no CMS. Here is 
 ## The stack
 
 - **Next.js and Tailwind** for the framework and styling.
-- **Motion** for animation, wrapped so every animation respects the OS "reduce motion" setting.
+- **Plain CSS for animation.** The hero entrance and scroll reveals are CSS, switched off for visitors who ask their OS for reduced motion. I started with an animation library and removed it: the headline was invisible until JavaScript loaded, which cost real Largest Contentful Paint time on phones.
 - **MDX** for posts like this one, so writing is just a file in `src/content/blog`.
 
 ## The design system in four lines

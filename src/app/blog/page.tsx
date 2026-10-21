@@ -6,13 +6,14 @@ import { writing } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Writing",
+  alternates: { canonical: "/blog" },
   description: "Notes on software engineering, AI and blockchain.",
 };
 
 export default function BlogIndex() {
   return (
     <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
-      <SectionHeading index="→" title="Writing" />
+      <SectionHeading index="→" title="Writing" as="h1" />
       <ul className="divide-y divide-line border-y border-line">
         {posts.map((post) => (
           <li key={post.slug}>

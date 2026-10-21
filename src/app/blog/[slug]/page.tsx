@@ -11,7 +11,11 @@ export async function generateMetadata(props: PageProps<"/blog/[slug]">): Promis
   const { slug } = await props.params;
   const post = posts.find((p) => p.slug === slug);
   if (!post) return {};
-  return { title: post.title, description: post.description };
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: { canonical: `/blog/${slug}` },
+  };
 }
 
 export default async function PostPage(props: PageProps<"/blog/[slug]">) {

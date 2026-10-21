@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { site } from "@/data/site";
 import { ThemeToggle } from "./ThemeToggle";
+import { MobileNav } from "./MobileNav";
 
 const nav = [
   { href: "/#projects", label: "Work" },
@@ -17,20 +18,21 @@ export function Header() {
           {site.name}
           <span className="text-accent">.</span>
         </Link>
-        <nav aria-label="Primary" className="flex items-center sm:gap-2">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-full px-2 py-2 text-sm text-muted transition-colors hover:text-fg sm:px-3"
-            >
-              {item.label}
-            </Link>
-          ))}
-          <span className="ml-1 sm:ml-0">
-            <ThemeToggle />
-          </span>
-        </nav>
+        <div className="flex items-center gap-2">
+          <nav aria-label="Primary" className="hidden items-center gap-2 sm:flex">
+            {nav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="rounded-full px-3 py-2 text-sm text-muted transition-colors hover:text-fg"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <ThemeToggle />
+          <MobileNav items={nav} />
+        </div>
       </div>
     </header>
   );

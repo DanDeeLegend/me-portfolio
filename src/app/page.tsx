@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Hero } from "@/components/Hero";
 import { Marquee } from "@/components/Marquee";
@@ -10,11 +11,31 @@ import { projects } from "@/data/projects";
 import { skillGroups, strengths, marqueeWords } from "@/data/skills";
 import { posts, formatDate } from "@/data/posts";
 
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
+// Structured data so search engines can connect the name, nickname and profiles.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  alternateName: "Dannybouy",
+  url: site.url,
+  jobTitle: "Software Engineering student",
+  description: site.tagline,
+  address: { "@type": "PostalAddress", addressLocality: "Abuja", addressCountry: "NG" },
+  affiliation: { "@type": "CollegeOrUniversity", name: "Nile University of Nigeria" },
+  sameAs: site.socials.map((s) => s.href),
+};
+
 export default function Home() {
   const featured = projects.filter((p) => p.featured);
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c") }}
+      />
       <Hero />
       <Marquee words={marqueeWords} />
 
@@ -183,7 +204,7 @@ export default function Home() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-full border border-line px-4 py-2 text-sm transition-colors hover:bg-fg hover:text-bg"
+                    className="inline-flex min-h-11 items-center rounded-full border border-line px-4 text-sm transition-colors hover:bg-fg hover:text-bg"
                   >
                     {s.label} ↗
                   </a>

@@ -10,7 +10,7 @@ export function Footer() {
         <ul className="flex flex-wrap gap-x-5 gap-y-2">
           {site.socials.map((s) => (
             <li key={s.label}>
-              <a href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-fg">
+              <a href={s.href} target="_blank" rel="noopener noreferrer" className="inline-block py-2 hover:text-fg">
                 {s.label}
               </a>
             </li>
