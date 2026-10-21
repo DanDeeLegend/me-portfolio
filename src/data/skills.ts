@@ -22,7 +22,6 @@ export const strengths = [
   "Critical & systems thinking",
   "Life-long learner",
   "Content creator",
-  "Loverboy",
 ] as const;
 
 export const marqueeWords = [

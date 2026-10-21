@@ -27,7 +27,7 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 font-mono text-xs text-muted"
         >
-          {site.available ? "Open to internships & freelance" : "Currently booked"} · {site.location}
+          {site.availability} · {site.location}
         </motion.p>
 
         <motion.h1

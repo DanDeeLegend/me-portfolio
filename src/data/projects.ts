@@ -71,40 +71,6 @@ export const projects: Project[] = [
     links: { demo: "https://ncf-website-ten.vercel.app" },
   },
   {
-    slug: "ncf-discipleship-portal",
-    title: "Discipleship School Portal",
-    summary:
-      "Mobile-first, role-based portal for a four-week discipleship school cohort, serving mentees, mentors and supervisors across eight roles.",
-    highlights: [
-      "Vanilla ES modules with no build step: one router, one page registry, one data layer.",
-      "Syncs across devices through Supabase with an offline outbox, and installs as a PWA.",
-      "Layout swept for horizontal overflow across eight roles and eight screen widths.",
-    ],
-    role: "Product owner and developer",
-    stack: ["JavaScript (ES modules)", "Supabase", "PWA", "Google Forms"],
-    year: "2026",
-    status: "In development",
-    featured: true,
-    privateRepo: true,
-    links: {},
-  },
-  {
-    slug: "nacos-nile-landing",
-    title: "NACOS Nile Landing Page",
-    summary:
-      "Single-page site for the Nile University chapter of the Nigeria Association of Computing Students, built for the chapter's landing-page competition.",
-    highlights: [
-      "Covers chapter identity across six disciplines, four initiative streams and a nine-member executive council.",
-      "Full SEO layer: Open Graph, Twitter cards, theme colour and custom brand assets.",
-    ],
-    role: "Designer and developer (competition entry)",
-    stack: ["Next.js", "React", "Vercel"],
-    year: "2026",
-    status: "Shipped",
-    featured: false,
-    links: { demo: "https://nacos-nile-landing.vercel.app" },
-  },
-  {
     slug: "signalmap",
     title: "SignalMap",
     summary:
@@ -118,7 +84,7 @@ export const projects: Project[] = [
     stack: ["Flutter", "Dart", "Figma", "Google Forms"],
     year: "2026",
     status: "Prototype",
-    featured: false,
+    featured: true,
     privateRepo: true,
     links: {},
   },

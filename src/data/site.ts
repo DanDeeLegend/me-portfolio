@@ -12,7 +12,7 @@ export const site = {
     "Software Engineering student at Nile University of Nigeria with hands-on experience in applied cryptography, blockchain apps and full-stack web and mobile. I work from primary sources and build products for real users.",
   location: "Abuja, Nigeria",
   email: "danielaminu2@gmail.com",
-  available: true,
+  availability: "Activeee for gigs, internships and the likes",
   /** Set to "/cv.pdf" after adding a CV to public/ (a redacted copy, without phone or student ID). */
   cvPath: null as string | null,
   socials: [
@@ -36,6 +36,7 @@ export const about = {
     { k: "Focus", v: "Blockchain · Cryptography · Full-stack" },
     { k: "Interned at", v: "Bitnob, Jul–Sep 2026" },
     { k: "Interests", v: "Frontend design, AI engineering, technical writing" },
+    { k: "Side quest", v: "Loverboy (full-time, unpaid)" },
   ],
 } as const;
 
