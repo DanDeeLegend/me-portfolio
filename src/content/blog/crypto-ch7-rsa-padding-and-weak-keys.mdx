@@ -1,0 +1,27 @@
+RSA is simple enough to do by hand and dangerous enough that almost every shortcut in it has been exploited.
+
+## RSA with p = 61 and q = 53
+
+The textbook example works out as follows: n = 3233, phi(n) = 3120, pick e = 17, and the private exponent is d = 2753. The message 65 encrypts to 2790 and decrypts back to 65. The tests decrypt every one of the 3,233 possible messages, not just that one.
+
+## Why padding is not optional
+
+The lab implements OAEP from scratch and checks it against a reference library in both directions. It also demonstrates three ways unpadded "textbook" RSA breaks:
+
+- **Deterministic:** the same message always gives the same ciphertext, so guesses can be confirmed.
+- **Malleable:** multiplying two ciphertexts yields the encryption of the product of the plaintexts. The demo turns 6 and 7 into 42 without the key.
+- **Small message, small exponent:** with e = 3 the ciphertext is just the plaintext cubed with no modular reduction, so an ordinary cube root recovers "attack at dawn".
+
+OAEP adds randomness, a redundancy check and full-width padding. It also returns one uniform error for every failure, because telling padding errors apart leads to Manger's chosen-ciphertext attack.
+
+## Why exponentiation needs squaring
+
+With a 2,048-bit modulus, computing a power with e = 65537 by repeated multiplication takes about **908 ms**. Square-and-multiply takes **178 microseconds**, about 5,100 times faster. For a 2,048-bit private exponent, square-and-multiply takes about 35 ms; the naive loop would need roughly 2^2047 multiplications, on the order of 10^604 years.
+
+## When two keys share a prime
+
+Two RSA moduli that share a prime factor are both broken by a gcd, which is fast. The lab builds a toy fleet of 600 devices with a weak prime pool and finds the shared factors with both pairwise gcds and batch GCD, recovering private keys and decrypting an intercepted message. See the deep dive on how this played out on the real internet.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

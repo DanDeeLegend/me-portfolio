@@ -1,0 +1,35 @@
+Diffie-Hellman lets two strangers agree on a secret in public. This chapter builds it, breaks it, fixes it, and then designs the key exchange for a chat app.
+
+## The exchange
+
+Alice picks a secret a and sends g^a; Bob picks b and sends g^b. Each raises the other's value to their own secret and gets g^(ab). With p = 23 and g = 5, a = 6 and b = 15 both arrive at 2. The same code runs over the standardised RFC 7919 groups, with checks that reject degenerate public values and a KDF between the raw secret and the key.
+
+Group size is the whole security story. Baby-step giant-step recovered a private exponent from a **40-bit** prime in **1.7 seconds**. The same generic attack on a 2,048-bit group would need about 2^1023 steps.
+
+## Breaking it, then fixing it
+
+Unauthenticated DH gives a shared secret, not an identity. Mallory swaps in her own values, ends up with a key shared with each side, and neither notices. The fix is a signature: each side signs the pair of public values with a long-term key the other already trusts. Mallory cannot forge that over her substituted values, so the exchange aborts.
+
+## ElGamal, and why nonces matter again
+
+ElGamal encrypts with a fresh random k. The textbook example (p = 2579, x = 765, k = 853) reproduces the published ciphertext (435, 2396). Two lessons: it is malleable (scale one half and the plaintext scales), and **reusing k is fatal**. Knowing one of two messages encrypted under the same k reveals the other. The same mistake appears in a famous signature-scheme break later in the series.
+
+## What a key exchange costs
+
+At about 76 ms per side in this Python benchmark, ffdhe2048 is roughly 1,200 times more expensive than X25519, and ffdhe4096 about 8,600 times, for comparable or only modestly higher security. For new designs, use X25519; if you must use finite-field DH, use a standardised 3072-bit or larger group, ephemeral keys, and validate peer values.
+
+## An authenticated key exchange for chat
+
+The chapter ends with a design: long-term Ed25519 identities, an ephemeral X25519 exchange per session, signatures over a transcript containing both ephemerals and both identities, and key-confirmation MACs. The properties, each tested:
+
+- A substituted ephemeral key fails signature verification.
+- Identity misbinding is blocked because identities are inside the signed transcript.
+- Forward secrecy holds because ephemeral secrets are deleted after the handshake.
+- Replayed, reordered or tampered messages are rejected by per-direction counters.
+- A changed identity key raises an alarm until verified out of band.
+
+It has real limits (no ratcheting, trust on first use) and the write-up lists them. In production, use a vetted design like Noise, Signal or TLS 1.3.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

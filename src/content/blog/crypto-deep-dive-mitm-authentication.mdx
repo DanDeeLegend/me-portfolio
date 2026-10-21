@@ -1,0 +1,39 @@
+Encryption protects a message from everyone except the party on the other end of the channel. The whole difficulty is making sure that party is who you think it is.
+
+## Encryption without authentication
+
+Two parties run a Diffie-Hellman style exchange over a network an attacker controls. Nothing in a plain exchange says whose public key is whose, so the attacker can substitute her own:
+
+```
+Alice <---- key exchange ----> Mallory <---- key exchange ----> Bob
+       (secret shared with Mallory)        (secret shared with Bob)
+```
+
+In the lab, Alice sends "meet at noon". Mallory decrypts it, changes it, re-encrypts it under Bob's key, and **Bob reads "meet at midnight"** with a valid authentication tag. Every cryptographic check passed. Neither side saw an error, because encryption had protected each leg of the journey perfectly.
+
+## Two ways to make the attack visible
+
+**A short authentication string.** Each side hashes the two public keys it saw into a short code, and the humans compare it over a different channel. Without an attacker, both see the same code. With Mallory in the middle, Alice and Bob see different ones, so the attack is detected. This is how Signal's safety numbers work. Its weakness is human: nobody compares, nothing is detected.
+
+**Signatures.** Each side signs the pair of public values with a long-term identity key the other side already trusts. Mallory cannot forge a signature over values she substituted, so verification fails and the exchange aborts, automatically.
+
+## What a complete design needs
+
+The chat-app exercise combines both ideas into one protocol and checks each property with a test:
+
+- **Sign a transcript, not a message.** The signature covers both ephemeral keys and both identities, so it cannot be replayed into another session or used to splice two conversations together.
+- **Confirm the keys.** MACs derived from the shared secret show both sides computed the same keys.
+- **Pin identities.** Trust on first use, plus an alarm when a known contact's key changes, until the user verifies a safety number.
+- **Delete ephemeral secrets.** Then stealing long-term keys later cannot reveal recorded sessions.
+
+## A lesson from my own first draft
+
+My first signed-exchange code verified Alice's signature with Bob's pinned key. It failed even with no attacker present, and the test caught it. Pinning bugs are easy to write: the code ran and looked plausible, but which key checks which signature is the entire protocol. Test the honest path as hard as the attack path.
+
+## Takeaway
+
+Confidentiality answers "can anyone else read this?" Authentication answers "am I talking to the right party?" A system with only the first is secure against eavesdroppers and wide open to anyone who can sit in the middle.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

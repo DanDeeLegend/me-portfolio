@@ -1,0 +1,29 @@
+Public-key cryptography solves key distribution, but it is slow and it does not, on its own, tell you who you are talking to. This chapter measures the first problem and demonstrates the second.
+
+## Square-and-multiply by hand
+
+RSA and Diffie-Hellman are built on `a^e mod n` with enormous exponents. Walking the exponent's bits, squaring each time and multiplying on a 1 bit, turns an impossible loop into a short one. By hand, 7^13 mod 11 with 13 as binary 1101 takes 7 multiplications instead of 12 and lands on 2, matching the library.
+
+## How much slower is public-key crypto?
+
+On the same machine, AES-256-GCM ran at about **8,800 MB/s**. RSA-2048 decryption, at 190 bytes per operation, managed about **0.56 MB/s**: roughly **15,000 times slower**, and the gap grows with key size (about 35,000 times at 4096 bits). One RSA private operation is around 2,000 squarings of 2,048-bit numbers; an AES round is a single CPU instruction.
+
+## So: hybrid encryption
+
+The standard answer is to use RSA only on a short key:
+
+1. Generate a random 256-bit AES key.
+2. Encrypt the message with AES-GCM.
+3. Wrap the AES key with RSA-OAEP and send both.
+
+A 1.3 MB message round-trips with only 418 bytes of overhead. The wrapped key is bound into the GCM associated data, so a ciphertext cannot be moved onto a different wrapped key, and every failure raises the same generic error.
+
+## The man in the middle
+
+An unauthenticated key exchange has a flaw no amount of encryption fixes. In the simulation, Mallory swaps each side's public key for her own, so she shares one secret with Alice and another with Bob. Alice sends "meet at noon". Mallory decrypts it, edits it, re-encrypts it, and Bob reads "meet at midnight" with a perfectly valid tag. Nothing raised an error on either side.
+
+The detectable version hashes the two public keys into a short code that the people compare over a separate channel. With no attacker both screens show the same code. Under attack, Alice and Bob see different codes. This is the idea behind Signal's safety numbers. Its weakness is human: if nobody compares, nothing is detected, which is why a later chapter automates the check with signatures.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*

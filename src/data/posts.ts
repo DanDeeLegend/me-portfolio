@@ -9,6 +9,54 @@ export type Post = {
 /** Add a post: create src/content/blog/<slug>.mdx and add its entry here (newest first). */
 export const posts: Post[] = [
   {
+    slug: "crypto-deep-dive-mitm-authentication",
+    title: "Deep dive: encryption without authentication protects you from the wrong person",
+    description:
+      "Mallory reads and edits a perfectly encrypted conversation. Short authentication strings, signed transcripts, and a bug in my own first draft.",
+    date: "2026-10-21",
+    tags: ["cryptography", "mitm", "deep-dive"],
+  },
+  {
+    slug: "crypto-deep-dive-rsa-common-factors",
+    title: "Deep dive: the RSA keys that fell to a GCD",
+    description:
+      "Two keys sharing a prime are both broken by a gcd. How weak randomness at first boot exposed real internet keys, reproduced on a toy fleet with batch GCD.",
+    date: "2026-10-21",
+    tags: ["cryptography", "rsa", "deep-dive"],
+  },
+  {
+    slug: "crypto-ch8-diffie-hellman-and-authenticated-key-exchange",
+    title: "Diffie-Hellman, ElGamal and an authenticated key exchange for chat",
+    description:
+      "Breaking a 40-bit group in 1.7 seconds, hijacking unauthenticated DH, fixing it with signatures, and a tested key-exchange design.",
+    date: "2026-10-21",
+    tags: ["cryptography", "diffie-hellman", "series"],
+  },
+  {
+    slug: "crypto-ch7-rsa-padding-and-weak-keys",
+    title: "RSA by hand, why padding matters, and keys that share primes",
+    description:
+      "A 61-and-53 key pair, three breaks of textbook RSA, 5,100x faster exponentiation, and recovering keys with a gcd.",
+    date: "2026-10-21",
+    tags: ["cryptography", "rsa", "series"],
+  },
+  {
+    slug: "crypto-ch6-hybrid-encryption-and-mitm",
+    title: "Hybrid encryption, and a man in the middle that nothing detects",
+    description:
+      "RSA decryption is about 15,000 times slower than AES-GCM, so wrap a key instead. And a simulation where Bob reads a message Mallory rewrote.",
+    date: "2026-10-21",
+    tags: ["cryptography", "public-key", "series"],
+  },
+  {
+    slug: "crypto-ch5-modes-and-authentication",
+    title: "The ECB penguin, GCM tamper detection and a TLS audit",
+    description:
+      "4,674 of 4,800 blocks repeat under ECB. Why unauthenticated CTR turns 100 dollars into 900, auditing real TLS, and a tamper-evident encrypted log.",
+    date: "2026-10-21",
+    tags: ["cryptography", "modes", "series"],
+  },
+  {
     slug: "crypto-ch4-aes-and-file-encryption",
     title: "AES by hand, then a file encryptor done right",
     description:

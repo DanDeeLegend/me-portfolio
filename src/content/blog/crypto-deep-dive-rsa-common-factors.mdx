@@ -1,0 +1,39 @@
+Factoring a 2,048-bit RSA modulus is believed to be infeasible. Computing a greatest common divisor is trivial. In 2012 researchers showed that the difference mattered more than anyone wanted it to.
+
+## The idea
+
+An RSA public key contains n = p times q, where p and q are secret primes. Suppose a second key, n2, was built from the same p and a different prime q2. Then:
+
+```python
+from math import gcd
+p = gcd(n1, n2)      # fast, even for huge numbers
+q1, q2 = n1 // p, n2 // p
+```
+
+Both keys are fully factored, and so are both private keys. No hard problem was solved: the attacker simply noticed that two strangers had reused a prime.
+
+## How it happened at scale
+
+In 2012, two independent research groups collected public keys from the internet and computed gcds across all of them. One paper is *Mining Your Ps and Qs* (Heninger, Durumeric, Wustrow and Halderman); the other is *Ron was wrong, Whit is right* (Lenstra and colleagues). A measurable fraction of keys, on the order of a few tenths of a percent up to about half a percent of hosts (quoted from memory, so check the papers for exact figures), shared a prime with another key and could be factored outright.
+
+The cause was not weak RSA but weak randomness. Embedded devices such as routers and firewalls generated their keys at first boot, before the operating system had gathered enough entropy. Many devices ended up drawing from the same small pool of primes.
+
+## Reproducing it in miniature
+
+The lab builds a toy fleet of 600 devices where half draw primes from a small shared pool, standing in for a low-entropy generator. Pairwise gcds find that 327 of the 600 keys (55%) share a prime, and the recovered private key decrypts an intercepted ciphertext.
+
+Comparing every pair is quadratic, so the lab also implements **batch GCD**: build a product tree of all moduli, push the full product down a remainder tree, and compute each key's gcd with the product of all the others. On the toy fleet it already runs about six times faster, and it scales to millions of keys.
+
+## A bug worth remembering
+
+My first batch implementation disagreed with the pairwise version. The cause: when **both** primes of a key appear in other keys, the batch gcd equals the whole modulus, which my filter threw away. The fix is to split such keys by gcd-ing against individual moduli. A test comparing the two methods caught it immediately, a good argument for cross-checking a clever algorithm against a naive one.
+
+## Lessons
+
+- Key generation is only as good as the randomness beneath it. Generate long-lived keys after the system has proper entropy.
+- The attack needs no knowledge of the victims, only their public keys. Monitoring a fleet's own public keys for shared factors is cheap and worth doing.
+- Cryptographic failures are often boring: not a clever mathematical break, but a counting argument that two supposedly random numbers were not.
+
+---
+
+*Part of a hands-on applied cryptography series. All code, tests and measurements are in the [cryptography-grind repo](https://github.com/DanDeeLegend/cryptography-grind). Built with Claude Code; every solution is tested and the numbers are measured, not quoted.*
