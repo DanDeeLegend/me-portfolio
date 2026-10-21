@@ -27,8 +27,9 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = { themeColor: "#0c0c10" };
 
-// Runs before first paint so the saved/system theme is applied without a flash.
-const themeScript = `(function(){try{var t=localStorage.getItem("theme");if(!t){t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme="dark"}})()`;
+// Runs before first paint so the saved theme is applied without a flash.
+// Dark (lime on near-black) is the signature look, so it is the default for everyone.
+const themeScript = `(function(){try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

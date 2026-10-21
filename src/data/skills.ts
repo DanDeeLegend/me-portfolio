@@ -1,22 +1,39 @@
-/** Grouped so recruiters can scan by category. REPLACE with what you actually use. */
+/** Technical skills come from the CV; "How I work" from Daniel's own list. */
 export const skillGroups = [
-  { group: "Languages", items: ["TypeScript", "JavaScript", "Python", "Solidity"] },
-  { group: "Frontend", items: ["React", "Next.js", "Tailwind CSS", "Framer Motion"] },
-  { group: "Backend & Data", items: ["Node.js", "FastAPI", "PostgreSQL", "Supabase"] },
-  { group: "AI", items: ["LLM APIs", "Prompt engineering", "Evaluation"] },
-  { group: "Blockchain", items: ["Smart contracts", "Cryptography basics", "Hardhat"] },
-  { group: "Tools", items: ["Git & GitHub", "Linux", "Vercel", "Figma"] },
+  { group: "Languages", items: ["TypeScript", "JavaScript", "Python", "Dart"] },
+  { group: "Frontend & Mobile", items: ["React", "Next.js", "Vite", "HTML & CSS", "Tailwind CSS", "Flutter"] },
+  { group: "Backend & Data", items: ["Supabase", "Google Apps Script"] },
+  {
+    group: "Blockchain",
+    items: ["Ethereum (Sepolia)", "ethers.js v6", "Alchemy JSON-RPC", "Event log decoding", "ABI encoding"],
+  },
+  {
+    group: "Cryptography",
+    items: ["AES-CBC", "PKCS#7 padding", "DES / 3DES", "Classical cipher cryptanalysis", "PyCryptodome"],
+  },
+  { group: "Tools & Testing", items: ["Git & GitHub", "pytest", "Cursor", "Claude Code", "Figma", "Vercel"] },
+] as const;
+
+export const strengths = [
+  "Product management",
+  "AI development",
+  "Leadership",
+  "Blockchain development",
+  "Critical & systems thinking",
+  "Life-long learner",
+  "Content creator",
+  "Loverboy",
 ] as const;
 
 export const marqueeWords = [
   "TypeScript",
   "React",
   "Next.js",
+  "Flutter",
   "Python",
-  "Solidity",
+  "Ethereum",
   "Cryptography",
   "AI Engineering",
+  "Product",
   "System Design",
-  "Tailwind",
-  "PostgreSQL",
 ];

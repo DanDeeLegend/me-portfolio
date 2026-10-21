@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionHeading } from "@/components/SectionHeading";
 import { posts, formatDate } from "@/data/posts";
+import { writing } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Writing",
@@ -27,6 +28,18 @@ export default function BlogIndex() {
           </li>
         ))}
       </ul>
+      <p className="mt-10 text-muted">
+        More writing on{" "}
+        {writing.map((w, i) => (
+          <span key={w.platform}>
+            {i > 0 && " and "}
+            <a href={w.href} target="_blank" rel="noopener noreferrer" className="text-accent underline underline-offset-4">
+              {w.platform}
+            </a>
+          </span>
+        ))}
+        .
+      </p>
     </div>
   );
 }

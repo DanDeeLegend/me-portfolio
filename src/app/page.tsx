@@ -5,9 +5,9 @@ import { Reveal } from "@/components/Reveal";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ContactForm } from "@/components/ContactForm";
-import { about, site } from "@/data/site";
+import { about, experience, site, writing } from "@/data/site";
 import { projects } from "@/data/projects";
-import { skillGroups, marqueeWords } from "@/data/skills";
+import { skillGroups, strengths, marqueeWords } from "@/data/skills";
 import { posts, formatDate } from "@/data/posts";
 
 export default function Home() {
@@ -54,6 +54,35 @@ export default function Home() {
           </Reveal>
         </div>
 
+        <div className="mt-20">
+          <Reveal>
+            <h3 className="mb-6 font-mono text-xs uppercase text-accent">Experience</h3>
+          </Reveal>
+          {experience.map((job) => (
+            <Reveal key={job.org}>
+              <div className="rounded-3xl border border-line bg-card p-6 sm:p-8">
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                  <h4 className="font-display text-2xl font-bold">
+                    {job.role} · {job.org}
+                  </h4>
+                  <span className="font-mono text-sm text-muted">{job.period}</span>
+                </div>
+                <p className="mt-1 text-sm text-muted">{job.context}</p>
+                <ul className="mt-5 space-y-3 text-muted">
+                  {job.points.map((p) => (
+                    <li key={p} className="flex gap-3">
+                      <span aria-hidden="true" className="text-accent">
+                        →
+                      </span>
+                      <span>{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
         <div className="mt-20 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((g, i) => (
             <Reveal key={g.group} delay={(i % 3) * 0.08}>
@@ -70,10 +99,38 @@ export default function Home() {
             </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-6">
+          <div className="rounded-3xl border border-accent p-6">
+            <h3 className="font-mono text-xs uppercase text-accent">How I work</h3>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {strengths.map((s) => (
+                <li key={s} className="rounded-full bg-card px-4 py-2">
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
       </section>
 
       <section id="writing" aria-labelledby="writing-h" className="mx-auto max-w-6xl scroll-mt-20 px-5 py-24 sm:px-8">
         <SectionHeading index="03" title="Writing" id="writing-h" />
+        <div className="mb-10 grid gap-6 sm:grid-cols-2">
+          {writing.map((w, i) => (
+            <Reveal key={w.platform} delay={i * 0.08}>
+              <a
+                href={w.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block h-full rounded-3xl border border-line bg-card p-6 transition-colors hover:border-accent"
+              >
+                <span className="font-display text-2xl font-bold">{w.platform} ↗</span>
+                <p className="mt-2 text-muted">{w.blurb}</p>
+              </a>
+            </Reveal>
+          ))}
+        </div>
         <ul className="divide-y divide-line border-y border-line">
           {posts.slice(0, 3).map((post) => (
             <li key={post.slug}>

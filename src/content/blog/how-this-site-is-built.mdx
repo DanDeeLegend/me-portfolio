@@ -1,0 +1,22 @@
+This site is small on purpose: a handful of pages, no database, no CMS. Here is what's under the hood and why.
+
+## The stack
+
+- **Next.js and Tailwind** for the framework and styling.
+- **Motion** for animation, wrapped so every animation respects the OS "reduce motion" setting.
+- **MDX** for posts like this one, so writing is just a file in `src/content/blog`.
+
+## The design system in four lines
+
+1. **One accent colour per theme.** Lime `#c8ff3d` on near-black `#0c0c10` in dark mode; violet on warm paper in light mode. Lime on a light background fails contrast, so light mode gets its own accent.
+2. **Tokens, not values.** Components use names like `bg-bg` and `text-accent`, never hex codes, so a theme is just a different set of variables.
+3. **Two typefaces with one job each.** Bricolage Grotesque for display, Geist for reading, Geist Mono for labels.
+4. **Bold only where it earns attention.** The hero moves; project cards stay plain so the work is easy to read.
+
+## Content lives in typed data files
+
+Projects, skills and links are plain TypeScript arrays. Adding a project means adding one object, and the type checker tells me if I forgot a field.
+
+## What I'd revisit
+
+The contact form only opens a pre-filled email. That's fine for a portfolio, but a real form should post to a server action with rate limiting and a honeypot field.

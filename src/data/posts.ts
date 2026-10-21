@@ -6,15 +6,15 @@ export type Post = {
   tags: string[];
 };
 
-/** Add a new post: create src/content/blog/<slug>.mdx and add its entry here (newest first). */
+/** Add a post: create src/content/blog/<slug>.mdx and add its entry here (newest first). */
 export const posts: Post[] = [
   {
-    slug: "hello-world",
-    title: "Hello, world: why I'm building in public",
+    slug: "how-this-site-is-built",
+    title: "How this portfolio is built",
     description:
-      "A placeholder post. Replace it with your first real article, e.g. what you learned this month.",
-    date: "2026-01-01",
-    tags: ["meta"],
+      "The stack, the design system and the handful of decisions behind this site, including the ones I'd revisit.",
+    date: "2026-10-21",
+    tags: ["nextjs", "design", "meta"],
   },
 ];
 

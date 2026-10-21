@@ -10,6 +10,8 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
     e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
   }
 
+  const live = project.status === "Live";
+
   return (
     <article
       onMouseMove={onMove}
@@ -25,24 +27,44 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
       />
       <div className="relative flex items-center justify-between font-mono text-xs text-muted">
         <span>{String(index + 1).padStart(2, "0")}</span>
-        <span>{project.year}</span>
+        <span className="flex items-center gap-3">
+          <span
+            className={
+              "rounded-full border px-2.5 py-0.5 " +
+              (live ? "border-accent text-accent" : "border-line text-muted")
+            }
+          >
+            {project.status}
+          </span>
+          {project.year}
+        </span>
       </div>
       <h3 className="relative mt-6 font-display text-3xl font-bold tracking-tight">
         {project.title}
       </h3>
       <p className="relative mt-3 text-muted">{project.summary}</p>
-      <p className="relative mt-4 text-sm">
+      <ul className="relative mt-5 space-y-2 text-sm text-muted">
+        {project.highlights.map((h) => (
+          <li key={h} className="flex gap-2">
+            <span aria-hidden="true" className="text-accent">
+              →
+            </span>
+            <span>{h}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="relative mt-5 text-sm">
         <span className="text-muted">Role: </span>
         {project.role}
       </p>
-      <ul className="relative mt-5 flex flex-wrap gap-2">
+      <ul className="relative mt-4 flex flex-wrap gap-2">
         {project.stack.map((s) => (
           <li key={s} className="rounded-full border border-line px-3 py-1 font-mono text-xs">
             {s}
           </li>
         ))}
       </ul>
-      <div className="relative mt-auto flex gap-5 pt-8 text-sm font-medium">
+      <div className="relative mt-auto flex flex-wrap gap-x-5 gap-y-2 pt-8 text-sm font-medium">
         {project.links.demo && (
           <a
             href={project.links.demo}
@@ -50,7 +72,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             rel="noopener noreferrer"
             className="text-accent underline-offset-4 hover:underline"
           >
-            Live demo ↗<span className="sr-only"> of {project.title}</span>
+            Live site ↗<span className="sr-only"> of {project.title}</span>
           </a>
         )}
         {project.links.repo && (
@@ -63,6 +85,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             Source ↗<span className="sr-only"> of {project.title}</span>
           </a>
         )}
+        {project.privateRepo && <span className="text-muted">Private repository</span>}
       </div>
     </article>
   );

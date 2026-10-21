@@ -27,7 +27,6 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 font-mono text-xs text-muted"
         >
-          <span className="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
           {site.available ? "Open to internships & freelance" : "Currently booked"} · {site.location}
         </motion.p>
 
@@ -35,7 +34,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-[clamp(3rem,10vw,8rem)] font-extrabold leading-[0.95] tracking-tighter"
+          className="font-display text-[clamp(2.75rem,8vw,6.5rem)] font-extrabold leading-[0.95] tracking-tighter"
         >
           Hi, I&apos;m {site.name}.
           <br />
@@ -79,13 +78,22 @@ export function Hero() {
           >
             See my work
           </a>
-          <a
-            href={site.cvPath}
-            download
-            className="rounded-full border border-line px-6 py-3 font-medium transition-colors hover:bg-fg hover:text-bg"
-          >
-            Download CV
-          </a>
+          {site.cvPath ? (
+            <a
+              href={site.cvPath}
+              download
+              className="rounded-full border border-line px-6 py-3 font-medium transition-colors hover:bg-fg hover:text-bg"
+            >
+              Download CV
+            </a>
+          ) : (
+            <a
+              href="#contact"
+              className="rounded-full border border-line px-6 py-3 font-medium transition-colors hover:bg-fg hover:text-bg"
+            >
+              Get in touch
+            </a>
+          )}
         </motion.div>
       </div>
     </section>
