@@ -27,7 +27,7 @@ export const site = {
 export const about = {
   paragraphs: [
     "I'm a Software Engineering undergraduate at Nile University of Nigeria, with hands-on experience in applied cryptography, blockchain application development and full-stack web and mobile engineering.",
-    "During my Bitnob internship I built and defended six technical projects, including a deployed Ethereum dashboard and a from-scratch PKCS#7/AES-CBC implementation. I'm most comfortable working from specifications, standards and papers rather than second-hand summaries.",
+    "During my Bitnob internship I built and defended six technical projects, including a from-scratch PKCS#7/AES-CBC implementation. I'm most comfortable working from specifications, standards and papers rather than second-hand summaries.",
     "Outside of code I write: technical articles on Medium, and essays on personal growth, faith and reflection on Substack.",
   ],
   facts: [
@@ -47,7 +47,6 @@ export const experience = [
     period: "Jul – Sep 2026",
     points: [
       "Completed and defended six technical projects in applied cryptography and blockchain application development, presented weekly to an engineering supervisor.",
-      "Built ContractLens, a React/TypeScript dashboard that decodes raw Ethereum event logs into readable smart-contract activity, deployed to production.",
       "Implemented PKCS#7 padding and AES-CBC encryption from first principles in Python, with a pytest suite proving correct behaviour and two deliberately introduced bugs.",
       "Wrote technical case studies on Kerckhoffs's principle, modern stream ciphers (RC4, Salsa20, ChaCha20) and a 3DES vs AES benchmark showing AES's ~10× throughput advantage.",
       "Took part in code reviews on the Bitnob application, identifying optimisation and security improvements.",

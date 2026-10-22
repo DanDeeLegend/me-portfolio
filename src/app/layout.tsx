@@ -5,6 +5,8 @@ import { site } from "@/data/site";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
+import { AskAssistant } from "@/components/AskAssistant";
+import { buildKnowledge, suggestedQuestions } from "@/lib/knowledge";
 
 const display = Bricolage_Grotesque({
   variable: "--font-display",
@@ -57,6 +59,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             {children}
           </main>
           <Footer />
+          <AskAssistant entries={buildKnowledge()} suggestions={suggestedQuestions} email={site.email} />
       </body>
     </html>
   );
