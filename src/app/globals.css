@@ -40,6 +40,7 @@
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
   --font-mono: var(--font-mono);
+  --font-hand: var(--font-hand);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -223,4 +224,42 @@ html[data-reveal="on"] .reveal.in {
   border-left: 3px solid var(--accent);
   padding-left: 1rem;
   color: var(--muted);
+}
+
+/* Collage pieces */
+.photo-sticker {
+  filter: drop-shadow(4px 0 0 #fff) drop-shadow(-4px 0 0 #fff) drop-shadow(0 4px 0 #fff) drop-shadow(0 -4px 0 #fff)
+    drop-shadow(0 14px 18px rgb(0 0 0 / 0.4));
+}
+.polaroid {
+  position: relative;
+  background: #fff;
+  padding: 12px 12px 14px;
+  box-shadow: 0 14px 30px rgb(0 0 0 / 0.35);
+}
+.tape {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  width: 92px;
+  height: 28px;
+  background: color-mix(in srgb, var(--accent) 70%, transparent);
+  transform: translateX(-50%) rotate(-4deg);
+}
+.font-hand {
+  font-family: var(--font-hand), "Comic Sans MS", cursive;
+}
+@keyframes wiggle {
+  0%, 100% { rotate: -6deg; }
+  25% { rotate: 2deg; }
+  50% { rotate: -9deg; }
+  75% { rotate: 0deg; }
+}
+.wiggle:hover {
+  animation: wiggle 0.7s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .wiggle:hover {
+    animation: none;
+  }
 }

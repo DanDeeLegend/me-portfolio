@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { Mascot } from "./Mascot";
 import { MIN_CONFIDENT_SCORE, buildIndex, search, type Entry, type Hit } from "@/lib/search";
 
 type Props = { entries: Entry[]; suggestions: string[]; email: string };
@@ -99,7 +100,8 @@ export function AskAssistant({ entries, suggestions, email }: Props) {
           className="fixed right-4 bottom-20 z-50 flex max-h-[min(34rem,calc(100dvh-7rem))] w-[min(26rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-2xl border border-line bg-card shadow-2xl"
         >
           <div className="flex items-start justify-between gap-3 border-b border-line px-4 py-3">
-            <div>
+            <Mascot mood="smile" className="-mt-1 -ml-1 w-14 shrink-0" />
+            <div className="min-w-0 flex-1">
               <p className="font-display text-lg font-semibold">Ask about Daniel</p>
               <p className="text-xs text-muted">
                 Searches this site&apos;s content in your browser. It&apos;s search, not AI, and nothing you type is sent or saved.

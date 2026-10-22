@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <div className="mx-auto max-w-6xl px-5 py-20 sm:px-8">
-      <SectionHeading index="→" title="All projects" as="h1" />
+      <SectionHeading note="stuff I've actually shipped" title="All projects" as="h1" />
       <div className="grid gap-6 md:grid-cols-2">
         {projects.map((p, i) => (
           <ProjectCard key={p.slug} project={p} index={i} titleAs="h2" />

@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Caveat, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/data/site";
-import { Header } from "@/components/Header";
+import { FloatingNav } from "@/components/FloatingNav";
+import { DoodleDefs } from "@/components/Doodles";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { AskAssistant } from "@/components/AskAssistant";
@@ -12,6 +13,7 @@ const display = Bricolage_Grotesque({
   variable: "--font-display",
   subsets: ["latin"],
 });
+const hand = Caveat({ variable: "--font-hand", subsets: ["latin"] });
 const body = Geist({ variable: "--font-body", subsets: ["latin"] });
 const mono = Geist_Mono({ variable: "--font-mono", subsets: ["latin"] });
 
@@ -41,7 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      className={`${display.variable} ${body.variable} ${mono.variable} ${hand.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
@@ -54,7 +56,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             Skip to content
           </a>
           <ScrollProgress />
-          <Header />
+          <DoodleDefs />
+          <FloatingNav />
           <main id="main" className="flex-1">
             {children}
           </main>

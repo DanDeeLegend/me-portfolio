@@ -8,7 +8,7 @@ export const site = {
   url: "https://me-portfolio-gamma-one.vercel.app", // production alias; change if you add a custom domain
   headline: "Software engineer in the making.",
   tagline:
-    "Software Engineering student at Nile University of Nigeria with hands-on experience in applied cryptography, blockchain apps and full-stack web and mobile. I work from primary sources and build products for real users.",
+    "Software Engineering student at Nile University, Abuja. I read the spec, build the thing, break it on purpose, then write down what happened. Right now that means cryptography, Flutter apps for my campus, and a long list of side quests.",
   location: "Abuja, Nigeria",
   email: "danielaminu2@gmail.com",
   availability: "Activeee for gigs, internships and the likes",
@@ -26,16 +26,16 @@ export const site = {
 
 export const about = {
   paragraphs: [
-    "I'm a Software Engineering undergraduate at Nile University of Nigeria, with hands-on experience in applied cryptography, blockchain application development and full-stack web and mobile engineering.",
-    "During my Bitnob internship I built and defended six technical projects, including a from-scratch PKCS#7/AES-CBC implementation. I'm most comfortable working from specifications, standards and papers rather than second-hand summaries.",
-    "Outside of code I write: technical articles on Medium, and essays on personal growth, faith and reflection on Substack.",
+    "I'm Daniel, but pretty much everywhere I go I'm Dannybouy. I study Software Engineering at Nile University in Abuja, and I'm happiest when I understand a thing all the way down: the spec, the failure mode, and why it was designed that way.",
+    "This summer I spent July to September at Bitnob, a payments company, building six projects in cryptography and blockchain and presenting each one to an engineer every week. Explaining my own code out loud turned out to be the real test.",
+    "Outside of code I write: engineering notes on Medium, and essays on faith and growth on Substack. I build for the people around me too: a campus signal map, my fellowship's website, and a thirteen-chapter cryptography series where every number is measured.",
   ],
   facts: [
     { k: "Studying", v: "B.Sc. Software Engineering, Nile University (exp. 2028)" },
-    { k: "Focus", v: "Blockchain · Cryptography · Full-stack" },
+    { k: "Based in", v: "Abuja, Nigeria" },
+    { k: "Focus", v: "Cryptography · Blockchain · Full-stack" },
     { k: "Interned at", v: "Bitnob, Jul–Sep 2026" },
-    { k: "Interests", v: "Frontend design, AI engineering, technical writing" },
-    { k: "Side quest", v: "Loverboy (full-time, unpaid)" },
+    { k: "Answers to", v: "Daniel, Dannybouy" },
   ],
 } as const;
 
