@@ -50,7 +50,7 @@ export function FloatingNav() {
   return (
     <header className="pointer-events-none fixed inset-x-0 top-3 z-40 flex justify-center px-3 sm:top-4">
       <div className="pointer-events-auto relative w-full max-w-fit">
-        <div className="flex items-center gap-1 rounded-full border border-line bg-card/85 p-1.5 shadow-lg backdrop-blur-md">
+        <div className="flex items-center gap-1 liquid-glass rounded-full p-1.5">
           <Link href="/" aria-label={`${site.name}, home`} className="flex items-center gap-2 rounded-full py-0.5 pr-3 pl-0.5">
             <span className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-full bg-accent">
               <Mascot mood="smile" className="mt-[-2px] ml-[-3px] w-[62px] max-w-none -translate-y-[3px]" />
@@ -97,7 +97,7 @@ export function FloatingNav() {
         </div>
 
         {open && (
-          <nav id="mobile-menu" aria-label="Mobile" className="absolute inset-x-0 top-full mt-2 rounded-3xl border border-line bg-card p-3 shadow-xl md:hidden">
+          <nav id="mobile-menu" aria-label="Mobile" className="absolute inset-x-0 top-full mt-2 liquid-glass rounded-3xl p-3 md:hidden">
             <ul>
               {items.map((i) => (
                 <li key={i.href}>
