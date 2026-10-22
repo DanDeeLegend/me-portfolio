@@ -91,3 +91,9 @@ def svg(mood):
 out = pathlib.Path(__file__).resolve().parent.parent / "public" / "mascot"
 for mood in ("smile", "wink", "wave", "confused"):
     (out / f"dannybouy-{mood}.svg").write_text(svg(mood))
+
+# Head-only avatar for tiny sizes (nav logo): no sticker filter or plaid, tight crop, so it stays crisp at 40px.
+AVATAR_DEFS = '<defs><clipPath id="headclip"><ellipse cx="150" cy="138" rx="98" ry="86"/></clipPath></defs>'
+avatar = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="38 18 224 212" width="224" height="212" role="img">'
+          f'{AVATAR_DEFS}{head("smile")}</svg>')
+(out / "dannybouy-avatar.svg").write_text(avatar)

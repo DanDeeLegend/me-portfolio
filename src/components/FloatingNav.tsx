@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { site } from "@/data/site";
-import { Mascot } from "./Mascot";
 import { ThemeToggle } from "./ThemeToggle";
 
 const items = [
@@ -52,8 +51,10 @@ export function FloatingNav() {
       <div className="pointer-events-auto relative w-full max-w-fit">
         <div className="flex items-center gap-1 liquid-glass rounded-full p-1.5">
           <Link href="/" aria-label={`${site.name}, home`} className="flex items-center gap-2 rounded-full py-0.5 pr-3 pl-0.5">
-            <span className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-full bg-accent">
-              <Mascot mood="smile" className="mt-[-2px] ml-[-3px] w-[62px] max-w-none -translate-y-[3px]" />
+            <span className="grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-full bg-accent ring-2 ring-white/50">
+              {/* Head-only vector avatar: the full sticker art blurs when scaled this small. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/mascot/dannybouy-avatar.svg" alt="" width={40} height={38} className="h-full w-full object-cover" />
             </span>
             <span className="font-display text-base font-bold tracking-tight">Dannybouy</span>
           </Link>
