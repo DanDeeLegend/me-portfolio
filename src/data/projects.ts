@@ -34,7 +34,7 @@ export const projects: Project[] = [
     role: "Designed and built end to end during the Bitnob internship",
     stack: ["React", "TypeScript", "Vite", "ethers.js v6", "Alchemy", "Vercel Functions"],
     year: "2026",
-    status: "In development",
+    status: "Live",
     featured: true,
     links: { demo: "https://contractlens-rust.vercel.app", repo: "https://github.com/DanDeeLegend/ContractLens" },
     shotLayout: "wide",
