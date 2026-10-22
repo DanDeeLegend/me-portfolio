@@ -37,7 +37,7 @@ const nextConfig: NextConfig = {
     return [
       // Everything except the CV PDF gets the strict policy. The PDF must be framable by this site's own /cv page,
       // and a restrictive CSP (object-src 'none') would stop Chrome's built-in PDF viewer from rendering it.
-      { source: "/((?!cv\\.pdf$).*)", headers: securityHeaders },
+      { source: "/((?!cv\\.pdf).*)", headers: securityHeaders },
       {
         source: "/cv.pdf",
         headers: [
