@@ -5,7 +5,7 @@
 export const site = {
   name: "Daniel Aminu",
   handle: "DanDeeLegend",
-  url: "https://example.com", // REPLACE with the deployed URL once hosted
+  url: "https://me-portfolio-gamma-one.vercel.app", // production alias; change if you add a custom domain
   headline: "Software engineer in the making.",
   tagline:
     "Software Engineering student at Nile University of Nigeria with hands-on experience in applied cryptography, blockchain apps and full-stack web and mobile. I work from primary sources and build products for real users.",
