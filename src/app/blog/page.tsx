@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function BlogIndex() {
   return (
-    <div className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
+    <div className="mx-auto max-w-3xl px-5 pt-32 pb-20 sm:px-8">
       <SectionHeading note="I think by typing" title="Writing" as="h1" />
       <ul className="divide-y divide-line border-y border-line">
         {posts.map((post) => (

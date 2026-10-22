@@ -52,7 +52,7 @@ export default function Home() {
           ))}
         </div>
         <Reveal className="mt-10">
-          <Link href="/projects" className="font-medium text-accent underline-offset-4 hover:underline">
+          <Link href="/projects" className="inline-flex min-h-11 items-center font-medium text-accent underline-offset-4 hover:underline">
             View all projects →
           </Link>
         </Reveal>
@@ -228,7 +228,7 @@ export default function Home() {
             </li>
           ))}
         </ul>
-        <Link href="/blog" className="mt-8 inline-block font-medium text-accent underline-offset-4 hover:underline">
+        <Link href="/blog" className="mt-8 inline-flex min-h-11 items-center font-medium text-accent underline-offset-4 hover:underline">
           All articles →
         </Link>
       </section>
@@ -237,11 +237,10 @@ export default function Home() {
         <SectionHeading note="I reply, promise" title="Let's talk" id="contact-h" />
         <div className="grid gap-12 md:grid-cols-2">
           <Reveal className="space-y-6">
-            <Mascot mood="wave" className="mb-2 w-32 sm:w-40" />
             <p className="font-display text-3xl font-semibold leading-tight sm:text-4xl">
               Got a project, internship or idea? <span className="text-accent">Say hello.</span>
             </p>
-            <a href={`mailto:${site.email}`} className="inline-block text-lg underline underline-offset-4">
+            <a href={`mailto:${site.email}`} className="inline-flex min-h-11 items-center text-lg underline underline-offset-4">
               {site.email}
             </a>
             <ul className="flex flex-wrap gap-3">

@@ -14,14 +14,14 @@ export function Hero() {
         className="pointer-events-none absolute -top-40 -right-32 h-[28rem] w-[28rem] rounded-full blur-3xl"
         style={{ background: "var(--glow)" }}
       />
-      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 pt-32 pb-24 sm:px-8 sm:pt-36 md:grid-cols-[1.35fr_1fr] md:gap-8 md:pb-28">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-5 pt-32 pb-24 sm:px-8 sm:pt-36 md:grid-cols-[1.65fr_1fr] md:gap-8 md:pb-28">
         <div>
           <p className="rise mb-7 inline-block -rotate-1 rounded-md border-2 border-dashed border-accent px-3.5 py-1.5 font-mono text-xs text-fg sm:text-sm">
             {site.availability} · {site.location}
           </p>
 
           <h1
-            className="rise font-display text-[clamp(2.5rem,6.6vw,5.6rem)] font-extrabold leading-[0.97] tracking-tighter"
+            className="rise font-display text-[clamp(2.4rem,5.4vw,4.9rem)] font-extrabold leading-[0.97] tracking-tighter"
             style={d(0.05)}
           >
             Heyaa I&apos;m Daniel
@@ -31,7 +31,7 @@ export function Hero() {
             <span className="text-muted">I </span>
             <span className="relative inline-block text-accent">
               vibecode
-              <Squiggle className="absolute -bottom-3 left-0 h-4 w-full text-fg" />
+              <Squiggle className="absolute -bottom-0.5 left-0 h-2.5 w-full text-fg" />
             </span>
             <span className="text-muted"> the unthinkable.</span>
           </h1>

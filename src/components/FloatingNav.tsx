@@ -97,7 +97,7 @@ export function FloatingNav() {
         </div>
 
         {open && (
-          <nav id="mobile-menu" aria-label="Mobile" className="absolute inset-x-0 top-full mt-2 liquid-glass rounded-3xl p-3 md:hidden">
+          <nav id="mobile-menu" aria-label="Mobile" className="liquid-glass liquid-glass-menu absolute top-full left-1/2 mt-2 w-[min(22rem,calc(100vw-1.5rem))] -translate-x-1/2 rounded-3xl p-3 md:hidden">
             <ul>
               {items.map((i) => (
                 <li key={i.href}>

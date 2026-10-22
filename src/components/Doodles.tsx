@@ -54,8 +54,8 @@ export function Spark({ className = "" }: P) {
 
 export function Squiggle({ className = "" }: P) {
   return (
-    <svg viewBox="0 0 120 24" aria-hidden="true" className={className} style={wob} {...base}>
-      <path d="M4 14c8-14 14 12 22 0s14 12 22 0 14 12 22 0 14 12 22 0 14 12 22 0" />
+    <svg viewBox="0 0 120 24" preserveAspectRatio="none" aria-hidden="true" className={className} style={wob} {...base}>
+      <path d="M4 14c8-14 14 12 22 0s14 12 22 0 14 12 22 0 14 12 22 0 14 12 22 0" vectorEffect="non-scaling-stroke" />
     </svg>
   );
 }

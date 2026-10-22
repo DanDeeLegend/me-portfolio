@@ -325,6 +325,16 @@ html[data-reveal="on"] .reveal.in {
     0 12px 34px color-mix(in srgb, var(--accent) 28%, rgb(40 30 90 / 0.15)),
     0 0 0 1px rgb(30 20 80 / 0.12);
 }
+/* The mobile menu sits over busy content, so it needs a denser base than the pill. */
+.liquid-glass-menu {
+  position: absolute; /* unlayered CSS beats Tailwind's layered utilities, so .liquid-glass's relative must be overridden here */
+  background-color: color-mix(in srgb, var(--bg) 80%, transparent);
+  -webkit-backdrop-filter: blur(30px) saturate(190%);
+  backdrop-filter: blur(30px) saturate(190%);
+}
+[data-theme="light"] .liquid-glass-menu {
+  background-color: rgb(255 255 255 / 0.82);
+}
 @media (prefers-reduced-motion: reduce) {
   .liquid-glass::after {
     animation: none;

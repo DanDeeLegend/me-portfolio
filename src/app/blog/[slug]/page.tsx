@@ -26,8 +26,8 @@ export default async function PostPage(props: PageProps<"/blog/[slug]">) {
   const { default: Content } = await import(`@/content/blog/${slug}.mdx`);
 
   return (
-    <article className="mx-auto max-w-3xl px-5 py-20 sm:px-8">
-      <Link href="/blog" className="font-mono text-sm text-muted hover:text-fg">
+    <article className="mx-auto max-w-3xl px-5 pt-32 pb-20 sm:px-8">
+      <Link href="/blog" className="inline-flex min-h-11 items-center font-mono text-sm text-muted hover:text-fg">
         ← All articles
       </Link>
       <header className="mt-8 mb-10">
