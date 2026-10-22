@@ -34,7 +34,20 @@ const nextConfig: NextConfig = {
   async headers() {
     // Dev needs eval for HMR, so the policy only applies to production builds.
     if (process.env.NODE_ENV !== "production") return [];
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      // Everything except the CV PDF gets the strict policy. The PDF must be framable by this site's own /cv page,
+      // and a restrictive CSP (object-src 'none') would stop Chrome's built-in PDF viewer from rendering it.
+      { source: "/((?!cv\\.pdf$).*)", headers: securityHeaders },
+      {
+        source: "/cv.pdf",
+        headers: [
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Content-Security-Policy", value: "frame-ancestors 'self'" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains" },
+        ],
+      },
+    ];
   },
   turbopack: {
     rules: {

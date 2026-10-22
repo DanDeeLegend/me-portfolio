@@ -74,13 +74,12 @@ export function FloatingNav() {
           </nav>
 
           {site.cvPath && (
-            <a
-              href={site.cvPath}
-              download
+            <Link
+              href={site.cvPage}
               className="ml-1 hidden rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition-transform hover:scale-105 sm:inline-block"
             >
               CV
-            </a>
+            </Link>
           )}
           <ThemeToggle />
           <button
@@ -109,9 +108,9 @@ export function FloatingNav() {
               ))}
               {site.cvPath && (
                 <li>
-                  <a href={site.cvPath} download className="mt-1 block rounded-2xl bg-accent px-4 py-3 text-center font-display text-xl font-semibold text-accent-ink">
-                    Download CV
-                  </a>
+                  <Link href={site.cvPage} onClick={() => setOpen(false)} className="mt-1 block rounded-2xl bg-accent px-4 py-3 text-center font-display text-xl font-semibold text-accent-ink">
+                    View CV
+                  </Link>
                 </li>
               )}
             </ul>

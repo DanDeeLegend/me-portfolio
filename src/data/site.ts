@@ -14,6 +14,8 @@ export const site = {
   availability: "Activeee for gigs, internships and the likes",
   /** Redacted CV (no phone number or student ID) lives at public/cv.pdf. Set to null to hide the button. */
   cvPath: "/cv.pdf" as string | null,
+  /** The CV opens in a viewer page first; the PDF itself is the download. */
+  cvPage: "/cv",
   socials: [
     { label: "GitHub", href: "https://github.com/DanDeeLegend" },
     { label: "LinkedIn", href: "https://linkedin.com/in/daniel-aminu" },
@@ -27,7 +29,7 @@ export const site = {
 export const about = {
   paragraphs: [
     "I'm Daniel, but pretty much everywhere I go I'm Dannybouy. I study Software Engineering at Nile University in Abuja, and I'm happiest when I understand a thing all the way down: the spec, the failure mode, and why it was designed that way.",
-    "This summer I spent July to September at Bitnob, a payments company, building six projects in cryptography and blockchain and presenting each one to an engineer every week. Explaining my own code out loud turned out to be the real test.",
+    "This summer I spent July to September at Bitnob, a payments company, building six projects in cryptography and blockchain, including ContractLens, an Ethereum event-log dashboard, and presenting each one to an engineer every week. Explaining my own code out loud turned out to be the real test.",
     "Outside of code I write: engineering notes on Medium, and essays on faith and growth on Substack. I build for the people around me too: a campus signal map, my fellowship's website, and a thirteen-chapter cryptography series where every number is measured.",
   ],
   facts: [
@@ -48,6 +50,7 @@ export const experience = [
     period: "Jul – Sep 2026",
     points: [
       "Completed and defended six technical projects in applied cryptography and blockchain application development, presented weekly to an engineering supervisor.",
+      "Built ContractLens, a React/TypeScript dashboard that decodes raw Ethereum event logs into readable smart-contract activity.",
       "Implemented PKCS#7 padding and AES-CBC encryption from first principles in Python, with a pytest suite proving correct behaviour and two deliberately introduced bugs.",
       "Wrote technical case studies on Kerckhoffs's principle, modern stream ciphers (RC4, Salsa20, ChaCha20) and a 3DES vs AES benchmark showing AES's ~10× throughput advantage.",
       "Took part in code reviews on the Bitnob application, identifying optimisation and security improvements.",

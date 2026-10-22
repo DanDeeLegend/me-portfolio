@@ -149,25 +149,28 @@ export default function Home() {
         <ul className="grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {quests.map((q, i) => {
             const rot = ["-rotate-1", "rotate-1", "rotate-[0.5deg]", "-rotate-[1.5deg]", "rotate-[1.5deg]"][i % 5];
-            const inner = (
-              <>
-                <span className="font-mono text-xs text-accent uppercase">{q.tag}</span>
-                <h3 className="mt-2 font-display text-2xl leading-tight font-bold">{q.title}</h3>
-                <p className="mt-3 text-muted">{q.body}</p>
-                {q.href && <span className="font-hand mt-4 inline-block text-2xl text-accent">take a look →</span>}
-              </>
-            );
-            const cls = `block h-full rounded-2xl border-2 border-dashed border-line bg-card p-6 transition-transform hover:rotate-0 hover:border-accent ${rot}`;
             return (
               <li key={q.title}>
                 <Reveal delay={(i % 3) * 0.08} className="h-full">
-                  {q.href ? (
-                    <a href={q.href} {...(q.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})} className={cls}>
-                      {inner}
-                    </a>
-                  ) : (
-                    <div className={cls}>{inner}</div>
-                  )}
+                  <div className={`h-full rounded-2xl border-2 border-dashed border-line bg-card p-6 transition-transform hover:rotate-0 hover:border-accent ${rot}`}>
+                    <span className="font-mono text-xs text-accent uppercase">{q.tag}</span>
+                    <h3 className="mt-2 font-display text-2xl leading-tight font-bold">{q.title}</h3>
+                    <p className="mt-3 text-muted">{q.body}</p>
+                    {q.links && (
+                      <p className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
+                        {q.links.map((l) => (
+                          <a
+                            key={l.href}
+                            href={l.href}
+                            {...(l.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                            className="font-hand text-2xl text-accent underline-offset-4 hover:underline"
+                          >
+                            {l.label} →
+                          </a>
+                        ))}
+                      </p>
+                    )}
+                  </div>
                 </Reveal>
               </li>
             );
@@ -194,19 +197,14 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="group block h-full rounded-3xl border border-line bg-card p-6 transition-colors hover:border-accent"
               >
-                <div
-                  aria-hidden="true"
-                  className="relative mb-5 flex aspect-[1.91/1] items-end overflow-hidden rounded-2xl border border-line p-4"
-                  style={{
-                    background:
-                      "radial-gradient(120% 120% at 100% 0%, var(--glow), transparent 60%), var(--bg)",
-                  }}
-                >
-                  <span className="absolute top-1 right-4 select-none font-display text-[7rem] font-extrabold leading-none text-accent opacity-20">
-                    {w.platform[0]}
-                  </span>
-                  <span className="relative font-mono text-sm text-muted">{w.handle}</span>
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`/writing-${w.platform.toLowerCase()}.webp`}
+                  alt=""
+                  width={1200}
+                  height={630}
+                  className="mb-5 aspect-[1.91/1] w-full rounded-2xl border border-line object-cover"
+                />
                 <span className="font-display text-2xl font-bold">{w.platform} ↗</span>
                 <p className="mt-2 text-muted">{w.blurb}</p>
               </a>

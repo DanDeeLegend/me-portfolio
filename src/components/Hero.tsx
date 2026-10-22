@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { site } from "@/data/site";
 import { Arrow, Scribble, Spark, Squiggle } from "./Doodles";
 import { Mascot } from "./Mascot";
@@ -44,9 +45,9 @@ export function Hero() {
               See my work
             </a>
             {site.cvPath ? (
-              <a href={site.cvPath} download className="rounded-full border border-line px-6 py-3 font-medium transition-colors hover:bg-fg hover:text-bg">
-                Download CV
-              </a>
+              <Link href={site.cvPage} className="rounded-full border border-line px-6 py-3 font-medium transition-colors hover:bg-fg hover:text-bg">
+                View CV
+              </Link>
             ) : (
               <a href="#contact" className="rounded-full border border-line px-6 py-3 font-medium transition-colors hover:bg-fg hover:text-bg">
                 Get in touch

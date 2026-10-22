@@ -30,8 +30,8 @@ export function buildKnowledge(): Entry[] {
       id: "cv",
       kind: "Answer",
       title: "Where is the CV?",
-      text: "The CV is a PDF you can download. It is a redacted copy without a phone number or student ID.",
-      href: site.cvPath ?? "/#contact",
+      text: "The CV opens in a viewer on this site, with a button to download the PDF. The public copy leaves out the phone number; ask by email.",
+      href: site.cvPage,
       keywords: "cv resume download pdf",
     },
     {

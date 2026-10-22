@@ -22,6 +22,38 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "contractlens",
+    title: "ContractLens",
+    summary:
+      "Ethereum smart-contract activity dashboard. Give it a contract address and it turns raw Sepolia event logs into a readable activity feed.",
+    highlights: [
+      "Matches Keccak-256 event-signature hashes and decodes indexed and non-indexed parameters from ABI-encoded data.",
+      "Found the first version leaked its RPC key to every browser, so the key now lives behind a server-side proxy with a method allowlist, same-origin check and rate limits.",
+      "Windowed log scanner that adapts to provider block-range limits, with 34 unit tests.",
+    ],
+    role: "Designed and built end to end during the Bitnob internship",
+    stack: ["React", "TypeScript", "Vite", "ethers.js v6", "Alchemy", "Vercel Functions"],
+    year: "2026",
+    status: "In development",
+    featured: true,
+    links: { repo: "https://github.com/DanDeeLegend/ContractLens" },
+    shotLayout: "wide",
+    shots: [
+      {
+        src: "/projects/contractlens/dashboard.webp",
+        alt: "ContractLens dashboard: a contract card with its address, a search box and a table of recent interactions with function names, callers, block numbers, gas used and success or failed status.",
+        width: 1440,
+        height: 810,
+      },
+      {
+        src: "/projects/contractlens/transaction.webp",
+        alt: "ContractLens transaction detail: a transfer() call with caller wallet, block number, gas used, timestamp, transaction hash and decoded inputs (to address and amount).",
+        width: 1440,
+        height: 810,
+      },
+    ],
+  },
+  {
     slug: "padding-scheme-explorer",
     title: "Padding Scheme Explorer",
     summary:
