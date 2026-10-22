@@ -1,6 +1,13 @@
 export type ProjectStatus = "Live" | "Shipped" | "Prototype" | "In development" | "Planned" | "Concept";
 
-export type Shot = { src: string; alt: string; width: number; height: number };
+export type Shot = {
+  src: string;
+  /** Higher-resolution file shown in the zoom viewer; falls back to src. */
+  full?: string;
+  alt: string;
+  width: number;
+  height: number;
+};
 
 export type Project = {
   slug: string;
@@ -78,6 +85,7 @@ export const projects: Project[] = [
       "Collapsed 22 border radii into a 7-step scale and darkened muted text so it passes WCAG AA on every background.",
       "Cut 51 photographs from 171 MB to 9.2 MB with no visible loss.",
       "No backend or CMS: typed content files, plus Apps Script for email and a membership spreadsheet.",
+      "Meeting times, theme of the month, events, sermons, giving and counselling pages, with a light and dark theme.",
     ],
     role: "Designer and developer",
     stack: ["Next.js", "TypeScript", "Tailwind", "Framer Motion", "Vercel", "Apps Script"],
@@ -89,22 +97,46 @@ export const projects: Project[] = [
     shotLayout: "wide",
     shots: [
       {
-        src: "/projects/ncf/home.webp",
-        alt: "Nile Christian Fellowship home page: a full-width photo of a congregation in a lecture hall with the headline 'Nile Christian Fellowship', stats for members and years of ministry, and Join Us and Watch Sermons buttons.",
+        src: "/projects/ncf/hero.webp",
+        full: "/projects/ncf/hero-2x.webp",
+        alt: "Nile Christian Fellowship home page: a photo of a congregation in a lecture hall under the headline 'Nile Christian Fellowship', with member and years-of-ministry stats and Join Us and Watch Sermons buttons.",
         width: 1440,
-        height: 810,
+        height: 900,
+      },
+      {
+        src: "/projects/ncf/schedule.webp",
+        full: "/projects/ncf/schedule-2x.webp",
+        alt: "NCF meeting times: three cards for Sunday Service (8:00, 9:35 and 11:10 am), nightly Hostel Meetings, and Thursday and Friday Bible Study and Prayers, each with its location.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        src: "/projects/ncf/theme.webp",
+        full: "/projects/ncf/theme-2x.webp",
+        alt: "The Theme of the Month section: a poster for 'Let's Meet With Jesus' beside the theme, its scripture reference and a short reflection.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        src: "/projects/ncf/dark.webp",
+        full: "/projects/ncf/dark-2x.webp",
+        alt: "The same meeting-times cards in the site's dark mode, switched with the theme toggle in the header.",
+        width: 1440,
+        height: 900,
       },
       {
         src: "/projects/ncf/events.webp",
-        alt: "Nile Christian Fellowship events page: a hero reading 'Moments that transform lives' above an 'Upcoming Events' section.",
+        full: "/projects/ncf/events-2x.webp",
+        alt: "The Upcoming Events section: a featured card for Freshers' Sunday with its date, service times, a description and a See More button.",
         width: 1440,
-        height: 810,
+        height: 900,
       },
       {
-        src: "/projects/ncf/sermons.webp",
-        alt: "Nile Christian Fellowship sermons page: a hero reading 'Listen. Learn. Grow.' above a 'Find a message' browse section.",
+        src: "/projects/ncf/about.webp",
+        full: "/projects/ncf/about-2x.webp",
+        alt: "The About page's 'What Makes Us Different' section: four cards for student-focused, discipleship-centred, community-driven and campus-based.",
         width: 1440,
-        height: 810,
+        height: 900,
       },
     ],
   },

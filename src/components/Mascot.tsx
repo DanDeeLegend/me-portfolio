@@ -4,6 +4,6 @@ export type Mood = "smile" | "wink" | "wave" | "confused";
 export function Mascot({ mood = "smile", className = "", alt = "" }: { mood?: Mood; className?: string; alt?: string }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={`/mascot/dannybouy-${mood}.svg`} alt={alt} width={328} height={322} className={className} />
+    <img src={`/mascot/dannybouy-${mood}.svg`} alt={alt} width={344} height={342} className={`drop-shadow-[0_3px_5px_rgb(0_0_0/0.35)] ${className}`} />
   );
 }

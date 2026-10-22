@@ -2,6 +2,7 @@
 Chunky chibi sticker: oversized head, tiny body, thick ink outline, flat colour with one shade tone, die-cut white border."""
 import math
 import pathlib
+import re
 
 INK, SKIN, SHADE, BLUSH = "#1b1420", "#8f5b38", "#6c4228", "#c4704a"
 HAIR, HAIR_HI = "#1a1512", "#52443b"
@@ -12,12 +13,6 @@ def st(w=SW, fill="none"):
     return f'fill="{fill}" stroke="{INK}" stroke-width="{w}" stroke-linecap="round" stroke-linejoin="round"'
 
 DEFS = f"""<defs>
-<filter id="sticker" x="-15%" y="-15%" width="130%" height="130%">
-  <feMorphology in="SourceAlpha" operator="dilate" radius="9" result="d"/>
-  <feFlood flood-color="#ffffff"/><feComposite in2="d" operator="in" result="w"/>
-  <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity=".35" in="w" result="s"/>
-  <feMerge><feMergeNode in="s"/><feMergeNode in="SourceGraphic"/></feMerge>
-</filter>
 <pattern id="plaid" width="24" height="24" patternUnits="userSpaceOnUse">
   <rect width="24" height="24" fill="{PINK}"/>
   <rect x="10" width="5" height="24" fill="#fff" opacity=".8"/><rect y="10" width="24" height="5" fill="#fff" opacity=".8"/>
@@ -84,9 +79,20 @@ def extras(mood):
             f'<path d="{q}" fill="none" stroke="{LIME}" stroke-width="8" stroke-linecap="round"/>'
             f'<circle cx="262" cy="124" r="7.5" fill="{LIME}" stroke="{INK}" stroke-width="4.5"/>')
 
+def outline(art: str, grow: int = 24) -> str:
+    """Die-cut sticker border as pure geometry: the same shapes, painted white with fatter strokes, drawn underneath.
+    (An SVG filter would rasterise at a fixed size and blur when scaled; geometry stays sharp at any size or DPR.)"""
+    art = re.sub(r'<g clip-path="url\(#headclip\)">.*?</g>', "", art)
+    art = re.sub(r'\sopacity="[^"]*"', "", art)
+    art = re.sub(r'fill="(?!none)[^"]*"', 'fill="#ffffff"', art)
+    art = re.sub(r'stroke="(?!none)[^"]*"', 'stroke="#ffffff"', art)
+    art = re.sub(r'stroke-width="([\d.]+)"', lambda m: f'stroke-width="{float(m.group(1)) + grow:g}"', art)
+    return art
+
 def svg(mood):
-    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="-14 0 328 322" width="328" height="322" role="img">{DEFS}'
-            f'<g filter="url(#sticker)">{body(mood)}{head(mood)}{extras(mood)}</g></svg>')
+    art = f"{body(mood)}{head(mood)}{extras(mood)}"
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="-22 -16 344 342" width="344" height="342" role="img">{DEFS}'
+            f'<g>{outline(art)}</g><g>{art}</g></svg>')
 
 out = pathlib.Path(__file__).resolve().parent.parent / "public" / "mascot"
 for mood in ("smile", "wink", "wave", "confused"):
