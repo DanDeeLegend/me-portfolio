@@ -10,7 +10,7 @@ export const quests: Quest[] = [
   {
     title: "The Lord's Actor",
     tag: "film",
-    body: "Stepping in front of the camera for once. Watch the trailer, then the full film.",
+    body: "Never i knew i had such a gift!",
     links: [
       { label: "watch the trailer", href: "https://youtu.be/ijEhDM9ETVg" },
       { label: "watch the film", href: "https://youtu.be/utb3Fm49-dw" },

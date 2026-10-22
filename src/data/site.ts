@@ -18,7 +18,7 @@ export const site = {
   cvPage: "/cv",
   socials: [
     { label: "GitHub", href: "https://github.com/DanDeeLegend" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/daniel-aminu" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/daniel-aminu-852b3441a/" },
     { label: "Medium", href: "https://medium.com/@danielaminu2" },
     { label: "Substack", href: "https://substack.com/@dannii0" },
     { label: "Instagram", href: "https://instagram.com/dani0_tm" },
