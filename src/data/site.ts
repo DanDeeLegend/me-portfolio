@@ -35,6 +35,7 @@ export const about = {
     { k: "Based in", v: "Abuja, Nigeria" },
     { k: "Focus", v: "Cryptography · Blockchain · Full-stack" },
     { k: "Interned at", v: "Bitnob, Jul–Sep 2026" },
+    { k: "Off the clock", v: "Gaming, football, movies, dancing, reading" },
     { k: "Answers to", v: "Daniel, Dannybouy" },
   ],
 } as const;

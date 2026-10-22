@@ -75,6 +75,14 @@ export function buildKnowledge(): Entry[] {
       keywords: "cryptography crypto series chapters applied course learn tutorial github repo",
     },
     {
+      id: "interests",
+      kind: "Answer",
+      title: "What does Daniel do outside of code?",
+      text: "Gaming, football, movies, dancing and reading, plus writing on Medium and Substack.",
+      href: "/#about",
+      keywords: "interests hobbies fun free time outside gaming games football soccer movies films dancing dance reading books",
+    },
+    {
       id: "private-details",
       kind: "Answer",
       title: "Phone number or student ID?",
