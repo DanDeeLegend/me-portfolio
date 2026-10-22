@@ -86,6 +86,16 @@ export function ProjectCard({
             Live site ↗<span className="sr-only"> of {project.title}</span>
           </a>
         )}
+        {project.links.apk && (
+          <a
+            href={project.links.apk}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center underline-offset-4 hover:underline"
+          >
+            Android APK ↓<span className="sr-only"> of {project.title} (opens Google Drive)</span>
+          </a>
+        )}
         {project.links.repo && (
           <a
             href={project.links.repo}

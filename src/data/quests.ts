@@ -8,9 +8,9 @@ export const quests: Quest[] = [
     body: "No roadmap, no deadlines and zero tests. Somehow still the most demanding thing I've taken on.",
   },
   {
-    title: "The Lord's Actor",
+    title: "Kingdom Artiste",
     tag: "film",
-    body: "Never i knew i had such a gift!",
+    body: "Glorying God with my Gift",
     links: [
       { label: "watch the trailer", href: "https://youtu.be/ijEhDM9ETVg" },
       { label: "watch the film", href: "https://youtu.be/utb3Fm49-dw" },

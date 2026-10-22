@@ -10,6 +10,12 @@ export function DoodleDefs() {
         <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7" result="n" />
         <feDisplacementMap in="SourceGraphic" in2="n" scale="3" />
       </filter>
+      {/* Lens-like warp for the nav's backdrop (Chromium only; other browsers just get the blur). */}
+      <filter id="glass-distort" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves="1" seed="4" result="t" />
+        <feGaussianBlur in="t" stdDeviation="2" result="b" />
+        <feDisplacementMap in="SourceGraphic" in2="b" scale="16" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
     </svg>
   );
 }

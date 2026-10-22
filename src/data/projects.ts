@@ -14,7 +14,7 @@ export type Project = {
   featured: boolean;
   /** Source repo is private: show a label instead of a link that would 404. */
   privateRepo?: boolean;
-  links: { demo?: string; repo?: string };
+  links: { demo?: string; repo?: string; /** Android APK, sideloaded. */ apk?: string };
   /** Screenshots served from /public. "phones" = tall mobile shots side by side; "wide" = desktop shots with thumbnails. */
   shots?: Shot[];
   shotLayout?: "wide" | "phones";
@@ -124,7 +124,10 @@ export const projects: Project[] = [
     status: "Live",
     featured: true,
     privateRepo: true,
-    links: { demo: "https://signalmap-8117.onrender.com" },
+    links: {
+      demo: "https://signalmap-8117.onrender.com",
+      apk: "https://drive.google.com/file/d/12IKyzpjp29N1mT79ighkh3q4btfESdNp/view?usp=drivesdk",
+    },
     shotLayout: "phones",
     shots: [
       {
