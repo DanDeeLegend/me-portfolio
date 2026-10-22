@@ -36,7 +36,7 @@ export const projects: Project[] = [
     year: "2026",
     status: "In development",
     featured: true,
-    links: { repo: "https://github.com/DanDeeLegend/ContractLens" },
+    links: { demo: "https://contractlens-rust.vercel.app", repo: "https://github.com/DanDeeLegend/ContractLens" },
     shotLayout: "wide",
     shots: [
       {

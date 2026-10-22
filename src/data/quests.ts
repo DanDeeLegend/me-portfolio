@@ -10,7 +10,7 @@ export const quests: Quest[] = [
   {
     title: "Kingdom Artiste",
     tag: "film",
-    body: "Glorying God with my Gift",
+    body: "Lights, camera, worship! Glorying God with my gift, right there on screen.",
     links: [
       { label: "watch the trailer", href: "https://youtu.be/ijEhDM9ETVg" },
       { label: "watch the film", href: "https://youtu.be/utb3Fm49-dw" },
